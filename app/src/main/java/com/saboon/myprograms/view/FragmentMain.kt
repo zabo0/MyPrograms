@@ -5,13 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.divider.MaterialDividerItemDecoration
+import androidx.lifecycle.get
+import androidx.navigation.fragment.findNavController
 import com.saboon.myprograms.R
 import com.saboon.myprograms.adapter.MainFragmentProgramsRecyclerAdapter
 import com.saboon.myprograms.databinding.FragmentMainBinding
-import com.saboon.myprograms.viewmodel.VMFragmentMain
+import com.saboon.myprograms.model.ModelProgram
+import com.saboon.myprograms.model.ModelSubject
+import com.saboon.myprograms.viewmodel.VMFragmentProgram
+import com.saboon.myprograms.viewmodel.VMFragmentSubject
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -23,7 +25,16 @@ class FragmentMain @Inject constructor(
 
 
     private var _binding: FragmentMainBinding?=null
-    private lateinit var viewModel: VMFragmentMain
+    private lateinit var binding: FragmentMainBinding
+
+
+    private lateinit var viewModelSubject: VMFragmentSubject
+    private lateinit var viewModelProgram: VMFragmentProgram
+
+
+    private lateinit var program: ModelProgram
+    private lateinit var subjects: List<ModelSubject>
+
 
 
 
@@ -34,10 +45,30 @@ class FragmentMain @Inject constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(requireActivity()).get(VMFragmentMain::class.java)
 
-        val binding = FragmentMainBinding.bind(view)
+        viewModelProgram = ViewModelProvider(requireActivity())[VMFragmentProgram::class.java]
+        viewModelSubject = ViewModelProvider(requireActivity())[VMFragmentSubject::class.java]
+
+        binding = FragmentMainBinding.bind(view)
         _binding = binding
+
+
+        arguments.let {
+            if (it!=null){
+                val programId = it.getString("programId").toString()
+
+                viewModelProgram.observeProgram(programId).observe(viewLifecycleOwner, Observer {
+                    program = it
+                    binding.topAppBar.subtitle = program.title
+
+
+                    observe()
+                })
+
+
+
+            }
+        }
 
         binding.topAppBar.setNavigationOnClickListener {
             binding.fragmentMainDrawerLayout.open()
@@ -45,8 +76,14 @@ class FragmentMain @Inject constructor(
 
         binding.topAppBar.setOnMenuItemClickListener {menuItem ->
             when(menuItem.itemId){
+                R.id.goToSubjects -> {
+                    val action = FragmentMainDirections.actionFragmentMainToFragmentSubjects(program.id)
+                    findNavController().navigate(action)
+                    true
+                }
                 R.id.goToProgramDetails -> {
-                    // TODO: navigate to program details
+                    val action = FragmentMainDirections.actionFragmentMainToProgramsFragment()
+                    findNavController().navigate(action)
                     true
                 }
                 else -> false
@@ -54,19 +91,14 @@ class FragmentMain @Inject constructor(
 
         }
 
-        binding.fragmentMainProgramsRecyclerview.adapter = mainDrawerProgramRecyclerAdapter
-        binding.fragmentMainProgramsRecyclerview.layoutManager = LinearLayoutManager(requireContext())
-
-        binding.goToProgramsButton.setOnClickListener {
-            val action = FragmentMainDirections.actionFragmentMainToProgramsFragment()
-            it.findNavController().navigate(action)
+        binding.fragmentMainButtonAddSubject.setOnClickListener {
+            val action = FragmentMainDirections.actionFragmentMainToFragmentSubjects(program.id)
+            findNavController().navigate(action)
         }
 
-
-        // TODO: drawer menudeki program listesine basinca main menudeki liste guncellenecek
         // TODO: programlara subject ekle
 
-        observe()
+
 
 
 
@@ -77,11 +109,20 @@ class FragmentMain @Inject constructor(
 
 
     private fun observe(){
-        viewModel.observeAllPrograms().observe(viewLifecycleOwner, Observer {
-            mainDrawerProgramRecyclerAdapter.programs = it
+        viewModelSubject.observeAllSubjectByOwner(program.id).observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                subjects = it
+                if (subjects.isEmpty()){
+                    binding.mainFragmentRecyclerview.visibility = View.GONE
+                    binding.fragmentMainLinearLayoutEmpty.visibility = View.VISIBLE
+                }else{
+                    binding.mainFragmentRecyclerview.visibility = View.VISIBLE
+                    binding.fragmentMainLinearLayoutEmpty.visibility = View.GONE
+                }
+            }
         })
-    }
 
+    }
 
 
     override fun onDestroy() {

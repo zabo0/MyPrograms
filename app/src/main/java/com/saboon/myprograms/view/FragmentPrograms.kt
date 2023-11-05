@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.saboon.myprograms.R
@@ -15,7 +14,7 @@ import com.saboon.myprograms.adapter.ProgramFragmentRecyclerAdapter
 import com.saboon.myprograms.databinding.FragmentProgramsBinding
 import com.saboon.myprograms.model.ModelProgram
 import com.saboon.myprograms.util.DateGenerator
-import com.saboon.myprograms.util.Dialogs
+import com.saboon.myprograms.util.dialog.Dialogs
 import com.saboon.myprograms.util.IdGenerator
 import com.saboon.myprograms.viewmodel.VMFragmentProgram
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,11 +42,6 @@ class FragmentPrograms @Inject constructor(
         _binging = binding
 
 
-        binding.topAppBar.setNavigationOnClickListener {
-            val action = FragmentProgramsDirections.actionProgramsFragmentToFragmentMain()
-            it.findNavController().navigate(action)
-        }
-
         binding.programRecyclerView.adapter = programRecyclerAdapter
         binding.programRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         val dividerItemDecoration = MaterialDividerItemDecoration(requireContext(),1)
@@ -68,7 +62,7 @@ class FragmentPrograms @Inject constructor(
                     }
                 }
             }else if(process == "edit"){
-                Dialogs(requireActivity(), requireContext()).showEditProgramDialog(getString(R.string.edit)){newTitle ->
+                Dialogs(requireActivity(), requireContext()).showEditProgramDialog(getString(R.string.edit)){ newTitle ->
                     if (newTitle != ""){
                         viewModel.viewModelScope.launch {
                             viewModel.renameProgram(id, newTitle, DateGenerator().getDateInMillis())

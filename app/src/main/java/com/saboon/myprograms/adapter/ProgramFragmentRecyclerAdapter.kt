@@ -5,12 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.saboon.myprograms.R
 import com.saboon.myprograms.model.ModelProgram
 import com.saboon.myprograms.util.DateGenerator
+import com.saboon.myprograms.view.FragmentProgramsDirections
+import com.saboon.myprograms.viewmodel.VMFragmentProgram
 
 class ProgramFragmentRecyclerAdapter():RecyclerView.Adapter<ProgramFragmentRecyclerAdapter.FragmentProgramViewHolder>() {
 
@@ -69,6 +72,8 @@ class ProgramFragmentRecyclerAdapter():RecyclerView.Adapter<ProgramFragmentRecyc
 
 
 
+
+
         deleteButton.setOnClickListener {
 
             response?.let {
@@ -80,6 +85,11 @@ class ProgramFragmentRecyclerAdapter():RecyclerView.Adapter<ProgramFragmentRecyc
             response?.let {
                 it(programs[position].id, "edit")
             }
+        }
+
+        holder.itemView.setOnClickListener {
+            val action = FragmentProgramsDirections.actionProgramsFragmentToFragmentMain(programs[position].id)
+            it.findNavController().navigate(action)
         }
 
     }

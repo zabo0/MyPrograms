@@ -1,9 +1,10 @@
-package com.saboon.myprograms.util
+package com.saboon.myprograms.util.dialog
 
 import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.widget.Button
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -98,5 +99,9 @@ class Dialogs(private val activity: Activity, private val context: Context){
     }
 
 
+    fun showAddEditSubjectBottomSheetDialog(context: Context){
+        val bottomSheetDialog = BottomSheetDialog(context)
+        //val bottomSheetView = LayoutInflater.from(context).inflate(R.layout.bottom_sheet_addeditsubject)
+    }
 
 }

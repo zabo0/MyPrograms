@@ -7,11 +7,10 @@ import com.saboon.myprograms.repo.repositoryinterface.SubjectRepositoryInterface
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-
 @HiltViewModel
 class VMFragmentSubject @Inject constructor(
     private val repository: SubjectRepositoryInterface
-):ViewModel() {
+):ViewModel(){
 
     suspend fun insertSubject(subject: ModelSubject){
         repository.insertSubject(subject)
@@ -29,6 +28,7 @@ class VMFragmentSubject @Inject constructor(
         return repository.observeAllSubject()
     }
 
-
-
+    fun observeAllSubjectByOwner(id: String):LiveData<List<ModelSubject>?>{
+        return repository.observeAllSubjectByOwner(id)
+    }
 }

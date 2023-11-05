@@ -84,5 +84,12 @@
     <string name="programDetails">Program Details</string>
     <string name="subjects">Subjects</string>
     <string name="addSubject">Add Subject</string>
+    <string name="thereIsNoEventHereYet">There is no event here yet!</string>
+    <string name="youMustAddSubjectToAddEvent">You must add a subject to add event</string>
+    <string name="persons">Persons</string>
+    <string name="people">People</string>
+    <string name="person_2">Person 2</string>
+    <string name="person_3">Person 3</string>
+    <string name="youCouldTypeTeacherOrAssistant">You could type teacher or assistant ex.</string>
 
 </resources>

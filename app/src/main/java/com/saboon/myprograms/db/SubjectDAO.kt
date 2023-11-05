@@ -21,4 +21,7 @@ interface SubjectDAO {
 
     @Query("SELECT * FROM subjects")
     fun observeAllSubjects(): LiveData<List<ModelSubject>>
+
+    @Query("SELECT * FROM subjects WHERE id = :id")
+    fun observeAllSubjectByOwner(id: String): LiveData<List<ModelSubject>?>
 }

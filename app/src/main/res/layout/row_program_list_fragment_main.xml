@@ -3,6 +3,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 android:layout_width="match_parent"
 android:orientation="horizontal"
+    android:layout_margin="2dp"
+    android:background="@drawable/bg_basic_pressed_list_item"
 android:padding="12dp"
 android:layout_height="wrap_content">
 

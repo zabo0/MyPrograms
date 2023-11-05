@@ -4,11 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.saboon.myprograms.R
 import com.saboon.myprograms.model.ModelProgram
+import com.saboon.myprograms.view.FragmentMainDirections
 
 class MainFragmentProgramsRecyclerAdapter: RecyclerView.Adapter<MainFragmentProgramsRecyclerAdapter.MFPViewHolder>() {
 
@@ -51,6 +53,14 @@ class MainFragmentProgramsRecyclerAdapter: RecyclerView.Adapter<MainFragmentProg
             title.text = programs[position].title
             subjectCount.text = "0"
         }
+
+
+        holder.itemView.setOnClickListener {
+            val action = FragmentMainDirections.actionFragmentMainSelf(programs[position].id)
+            it.findNavController().navigate(action)
+        }
+
+
 
 
     }

@@ -13,4 +13,6 @@ interface SubjectRepositoryInterface {
 
     fun observeAllSubject(): LiveData<List<ModelSubject>>
 
+    fun observeAllSubjectByOwner(id: String): LiveData<List<ModelSubject>?>
+
 }
