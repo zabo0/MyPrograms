@@ -81,5 +81,8 @@
     <string name="no">No</string>
     <string name="areYouSure">Are You Sure?</string>
     <string name="use_without_create_account">Use without create an account</string>
+    <string name="programDetails">Program Details</string>
+    <string name="subjects">Subjects</string>
+    <string name="addSubject">Add Subject</string>
 
 </resources>

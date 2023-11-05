@@ -43,6 +43,16 @@ class FragmentMain @Inject constructor(
             binding.fragmentMainDrawerLayout.open()
         }
 
+        binding.topAppBar.setOnMenuItemClickListener {menuItem ->
+            when(menuItem.itemId){
+                R.id.goToProgramDetails -> {
+                    // TODO: navigate to program details
+                    true
+                }
+                else -> false
+            }
+
+        }
 
         binding.fragmentMainProgramsRecyclerview.adapter = mainDrawerProgramRecyclerAdapter
         binding.fragmentMainProgramsRecyclerview.layoutManager = LinearLayoutManager(requireContext())
