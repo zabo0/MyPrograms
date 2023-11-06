@@ -29,5 +29,8 @@ data class ModelSubject(
     val person2: String,
 
     @ColumnInfo(name = "person3")
-    val person3: String
+    val person3: String,
+
+    @ColumnInfo(name = "color")
+    val color: String
 )

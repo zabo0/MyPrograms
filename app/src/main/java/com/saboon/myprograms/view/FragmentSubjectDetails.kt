@@ -6,24 +6,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.saboon.myprograms.R
-import com.saboon.myprograms.databinding.FragmentAddEditSubjectBinding
+import com.saboon.myprograms.databinding.FragmentSubjectDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
-class FragmentAddEditSubject : Fragment(R.layout.fragment_add_edit_subject) {
+class FragmentSubjectDetails : Fragment(R.layout.fragment_subject_details) {
 
-    private var _binding: FragmentAddEditSubjectBinding?= null
-    private lateinit var binding: FragmentAddEditSubjectBinding
+    private var _binding: FragmentSubjectDetailsBinding?=null
+    private lateinit var binding: FragmentSubjectDetailsBinding
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentAddEditSubjectBinding.bind(view)
+
+        binding = FragmentSubjectDetailsBinding.bind(view)
         _binding = binding
 
     }
+
+
+
 
 
     override fun onDestroy() {
@@ -31,4 +34,5 @@ class FragmentAddEditSubject : Fragment(R.layout.fragment_add_edit_subject) {
 
         _binding = null
     }
+
 }

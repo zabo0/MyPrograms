@@ -7,15 +7,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.saboon.myprograms.R
+import com.saboon.myprograms.adapter.SubjectsFragmentRecyclerAdapter
 import com.saboon.myprograms.databinding.FragmentSubjectsBinding
 import com.saboon.myprograms.model.ModelProgram
 import com.saboon.myprograms.model.ModelSubject
 import com.saboon.myprograms.util.dialog.AddEditSubjectDialogFragment
 import com.saboon.myprograms.viewmodel.VMFragmentProgram
 import com.saboon.myprograms.viewmodel.VMFragmentSubject
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
-class FragmentSubjects : Fragment(R.layout.fragment_subjects) {
+@AndroidEntryPoint
+class FragmentSubjects @Inject constructor(
+    private val subjectsFragmentRecyclerAdapter: SubjectsFragmentRecyclerAdapter
+) : Fragment(R.layout.fragment_subjects) {
 
 
     private var _binding : FragmentSubjectsBinding?=null

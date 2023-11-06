@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.saboon.myprograms.adapter.MainFragmentProgramsRecyclerAdapter
 import com.saboon.myprograms.adapter.ProgramFragmentRecyclerAdapter
+import com.saboon.myprograms.adapter.SubjectsFragmentRecyclerAdapter
 import com.saboon.myprograms.db.MyProgsDatabase
 import com.saboon.myprograms.db.ProgramDAO
 import com.saboon.myprograms.db.SubjectDAO
@@ -49,6 +50,10 @@ object AppModule {
     @Singleton
     @Provides
     fun provideProgramFragmentRecyclerAdapter(): ProgramFragmentRecyclerAdapter = ProgramFragmentRecyclerAdapter()
+
+    @Singleton
+    @Provides
+    fun provideSubjectsFragmentRecyclerAdapter(): SubjectsFragmentRecyclerAdapter = SubjectsFragmentRecyclerAdapter()
 
 
 

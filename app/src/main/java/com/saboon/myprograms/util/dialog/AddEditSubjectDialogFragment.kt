@@ -82,7 +82,7 @@ class AddEditSubjectDialogFragment: DialogFragment() {
                     viewModelSubject.viewModelScope.launch {
                         viewModelSubject.insertSubject(subject)
 
-                        val action = FragmentSubjectsDirections.actionFragmentSubjectsToFragmentMain(program.id)
+                        val action = FragmentSubjectsDirections.actionFragmentSubjectsToFragmentSubjectDetails(program.id, subject.id)
                         findNavController().navigate(action)
                         dialog?.dismiss()
                     }
@@ -111,10 +111,11 @@ class AddEditSubjectDialogFragment: DialogFragment() {
         val person1 = textPerson1.text.toString()
         val person2 = textPerson2.text.toString()
         val person3 = textPerson3.text.toString()
+        val color = "#ff0000"
 
         val id = IdGenerator().generateSubjectId(dateCreated, program.title)
 
-        return ModelSubject(id,dateCreated,dateCreated,ownerId,title,person1,person2,person3)
+        return ModelSubject(id,dateCreated,dateCreated,ownerId,title,person1,person2,person3,color)
 
     }
 

@@ -91,5 +91,6 @@
     <string name="person_2">Person 2</string>
     <string name="person_3">Person 3</string>
     <string name="youCouldTypeTeacherOrAssistant">You could type teacher or assistant ex.</string>
+    <string name="addEvent">Add Event</string>
 
 </resources>

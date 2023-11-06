@@ -43,5 +43,23 @@
         <argument
             android:name="programId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_fragmentSubjects_to_fragmentSubjectDetails"
+            app:destination="@id/fragmentSubjectDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentSubjectDetails"
+        android:name="com.saboon.myprograms.view.FragmentSubjectDetails"
+        android:label="fragment_subject_details"
+        tools:layout="@layout/fragment_subject_details" >
+        <action
+            android:id="@+id/action_fragmentSubjectDetails_to_fragmentSubjects"
+            app:destination="@id/fragmentSubjects" />
+        <argument
+            android:name="programId"
+            app:argType="string" />
+        <argument
+            android:name="subjectId"
+            app:argType="string" />
     </fragment>
 </navigation>
