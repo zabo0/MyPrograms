@@ -17,14 +17,14 @@
 
 
         <TextView
-            android:id="@+id/subjectTitle"
+            android:id="@+id/subjectFragment_recyclerView_subjectTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Subject Title"
             android:textSize="16sp"/>
 
         <TextView
-            android:id="@+id/SubjectCreatedDate"
+            android:id="@+id/subjectFragment_recyclerView_subjectCreatedDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="12.02.2023"
@@ -33,7 +33,7 @@
 
     <ImageView
         android:background="@drawable/bg_basic_pressed_list_item"
-        android:id="@+id/subjectDetails"
+        android:id="@+id/subjectFragment_recyclerView_goToSubjectDetails"
         android:layout_width="wrap_content"
         android:padding="5dp"
         android:layout_height="wrap_content"

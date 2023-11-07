@@ -48,8 +48,6 @@ class FragmentSubjects @Inject constructor(
                     program = it
 
                     binding.topAppBar.subtitle = program.title
-
-
                     observe()
                 })
             }
