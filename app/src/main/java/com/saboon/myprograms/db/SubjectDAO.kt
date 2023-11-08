@@ -22,6 +22,9 @@ interface SubjectDAO {
     @Query("SELECT * FROM subjects")
     fun observeAllSubjects(): LiveData<List<ModelSubject>>
 
-    @Query("SELECT * FROM subjects WHERE id = :id")
+    @Query("SELECT * FROM subjects WHERE ownerId = :id")
     fun observeAllSubjectByOwner(id: String): LiveData<List<ModelSubject>?>
+
+    @Query("UPDATE subjects SET dateModified = :dateModified, title = :title, person1 = :person1, person2 = :person2, person3 = :person3, color = :color WHERE id = :id")
+    suspend fun updateSubject(id: String, dateModified: String, title: String, person1: String, person2: String, person3: String, color: String)
 }

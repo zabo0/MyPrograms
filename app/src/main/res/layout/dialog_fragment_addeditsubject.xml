@@ -237,7 +237,7 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/radio_red"
+            android:id="@+id/radio_color1"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
@@ -249,6 +249,7 @@
             android:layout_weight="1"/>
 
         <RadioButton
+            android:id="@+id/radio_color2"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
@@ -259,7 +260,7 @@
             android:layout_weight="1"/>
 
         <RadioButton
-            android:id="@+id/radio_blue"
+            android:id="@+id/radio_color3"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
@@ -270,7 +271,7 @@
             android:layout_weight="1"/>
 
         <RadioButton
-            android:id="@+id/radio_brown"
+            android:id="@+id/radio_color4"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
@@ -291,6 +292,7 @@
         android:orientation="horizontal">
 
         <RadioButton
+            android:id="@+id/radio_color5"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
@@ -305,6 +307,7 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
+            android:id="@+id/radio_color6"
             android:button="@null"
             android:background="@drawable/bg_radiobutton_color_picker_color_custom_6"
             android:textAlignment="center"
@@ -312,6 +315,7 @@
             android:layout_weight="1"/>
 
         <RadioButton
+            android:id="@+id/radio_color7"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
@@ -322,6 +326,7 @@
             android:layout_weight="1"/>
 
         <RadioButton
+            android:id="@+id/radio_color8"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"

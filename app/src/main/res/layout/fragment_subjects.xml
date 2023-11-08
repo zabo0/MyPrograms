@@ -28,7 +28,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/subjectsRecyclerView"
         android:layout_width="match_parent"
-        android:visibility="gone"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/row_subject_list_item_fragment_subject"

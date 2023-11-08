@@ -3,6 +3,7 @@ package com.saboon.myprograms.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -46,7 +47,7 @@ class SubjectDetailsFragmentRecyclerAdapter:
     }
 
     override fun onBindViewHolder(holder: SubjectDetailsViewHolder, position: Int) {
-        TODO("Not yet implemented")
+
     }
 
 

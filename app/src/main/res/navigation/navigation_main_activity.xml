@@ -56,10 +56,10 @@
             android:id="@+id/action_fragmentSubjectDetails_to_fragmentSubjects"
             app:destination="@id/fragmentSubjects" />
         <argument
-            android:name="programId"
+            android:name="subjectId"
             app:argType="string" />
         <argument
-            android:name="subjectId"
+            android:name="programId"
             app:argType="string" />
     </fragment>
 </navigation>

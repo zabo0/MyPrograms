@@ -6,6 +6,8 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.saboon.myprograms.R
 import com.saboon.myprograms.adapter.SubjectsFragmentRecyclerAdapter
 import com.saboon.myprograms.databinding.FragmentSubjectsBinding
@@ -19,11 +21,12 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class FragmentSubjects @Inject constructor(
-    private val subjectsFragmentRecyclerAdapter: SubjectsFragmentRecyclerAdapter
+    private val subjectsRecyclerAdapter: SubjectsFragmentRecyclerAdapter
 ) : Fragment(R.layout.fragment_subjects) {
 
 
     private var _binding : FragmentSubjectsBinding?=null
+    private lateinit var binding: FragmentSubjectsBinding
 
     private lateinit var viewModelSubject: VMFragmentSubject
     private lateinit var viewModelProgram: VMFragmentProgram
@@ -34,7 +37,7 @@ class FragmentSubjects @Inject constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val binding = FragmentSubjectsBinding.bind(view)
+        binding = FragmentSubjectsBinding.bind(view)
         _binding = binding
 
         viewModelSubject = ViewModelProvider(requireActivity()).get(VMFragmentSubject::class.java)
@@ -66,6 +69,15 @@ class FragmentSubjects @Inject constructor(
         }
 
 
+        binding.subjectsRecyclerView.adapter = subjectsRecyclerAdapter
+        binding.subjectsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        val dividerItemDecoration = MaterialDividerItemDecoration(requireContext(),1)
+        dividerItemDecoration.dividerInsetStart = 50
+        dividerItemDecoration.dividerInsetEnd = 50
+        dividerItemDecoration.isLastItemDecorated = false
+        binding.subjectsRecyclerView.addItemDecoration(dividerItemDecoration)
+
+
 
     }
 
@@ -75,6 +87,8 @@ class FragmentSubjects @Inject constructor(
         viewModelSubject.observeAllSubjectByOwner(program.id).observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 subjects = it
+
+                subjectsRecyclerAdapter.subjects = subjects
             }
         })
     }

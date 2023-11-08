@@ -71,7 +71,7 @@
     <color name="md_theme_dark_outlineVariant">#514347</color>
     <color name="md_theme_dark_scrim">#000000</color>
 
-    //COSTOM COLORS
+    //COSTOM COLORS for radio buttons
     <color name="CustomColor1">#FF214F</color>
     <color name="CustomColor2">#FFCC7A</color>
     <color name="CustomColor3">#5ED42D</color>

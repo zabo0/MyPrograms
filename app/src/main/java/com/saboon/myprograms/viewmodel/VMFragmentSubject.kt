@@ -31,4 +31,16 @@ class VMFragmentSubject @Inject constructor(
     fun observeAllSubjectByOwner(id: String):LiveData<List<ModelSubject>?>{
         return repository.observeAllSubjectByOwner(id)
     }
+
+    suspend fun updateSubject(newSubject: ModelSubject){
+
+        return repository.updateSubject(
+            newSubject.id,
+            newSubject.dateModified.toString(),
+            newSubject.title,
+            newSubject.person1,
+            newSubject.person2,
+            newSubject.person3,
+            newSubject.color)
+    }
 }

@@ -29,4 +29,18 @@ class SubjectRepository @Inject constructor(
     override fun observeAllSubjectByOwner(id: String): LiveData<List<ModelSubject>?> {
         return subjectDAO.observeAllSubjectByOwner(id)
     }
+
+    override suspend fun updateSubject(
+        id: String,
+        dateModified: String,
+        title: String,
+        person1: String,
+        person2: String,
+        person3: String,
+        color: String
+    ) {
+        return subjectDAO.updateSubject(id,dateModified,title,person1,person2,person3,color)
+    }
+
+
 }
