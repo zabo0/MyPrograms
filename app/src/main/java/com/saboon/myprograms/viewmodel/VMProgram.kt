@@ -8,7 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class VMFragmentProgram @Inject constructor(
+class VMProgram @Inject constructor(
     private val repository: ProgramRepositoryInterface
 ):ViewModel(){
 

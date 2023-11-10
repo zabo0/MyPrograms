@@ -8,26 +8,26 @@ import javax.inject.Inject
 
 class SubjectRepository @Inject constructor(
     private val subjectDAO: SubjectDAO
-): SubjectRepositoryInterface {
+) : SubjectRepositoryInterface {
 
-    override suspend fun insertSubject(subject: ModelSubject){
+    override suspend fun insertSubject(subject: ModelSubject) {
         subjectDAO.insertSubject(subject)
     }
 
-    override suspend fun deleteSubject(id:String){
+    override suspend fun deleteSubject(id: String) {
         subjectDAO.deleteSubject(id)
     }
 
-    override fun observeSubject(id: String): LiveData<ModelSubject>{
+    override fun observeSubject(id: String): LiveData<ModelSubject> {
         return subjectDAO.observeSubject(id)
     }
 
-    override fun observeAllSubject():LiveData<List<ModelSubject>>{
+    override fun observeAllSubject(): LiveData<List<ModelSubject>> {
         return subjectDAO.observeAllSubjects()
     }
 
-    override fun observeAllSubjectByOwner(id: String): LiveData<List<ModelSubject>?> {
-        return subjectDAO.observeAllSubjectByOwner(id)
+    override fun observeAllSubjectByOwner(ownerId: String): LiveData<List<ModelSubject>?> {
+        return subjectDAO.observeAllSubjectByOwner(ownerId)
     }
 
     override suspend fun updateSubject(
@@ -39,7 +39,7 @@ class SubjectRepository @Inject constructor(
         person3: String,
         color: String
     ) {
-        return subjectDAO.updateSubject(id,dateModified,title,person1,person2,person3,color)
+        return subjectDAO.updateSubject(id, dateModified, title, person1, person2, person3, color)
     }
 
 

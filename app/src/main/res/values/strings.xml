@@ -90,8 +90,21 @@
     <string name="people">People</string>
     <string name="person_2">Person 2</string>
     <string name="person_3">Person 3</string>
-    <string name="youCouldTypeTeacherOrAssistant">You could type teacher or assistant ex.</string>
+    <string name="youCouldTypeTeacherOrAssistant">You could type teacher or assistant etc.</string>
     <string name="addEvent">Add Event</string>
     <string name="editSubject">Edit Subject</string>
+    <string name="event">Event</string>
+    <string name="description">Description (subject, lab, practical, exam...)</string>
+    <string name="time">Time</string>
+    <string name="date">Date</string>
+    <string name="Repeat">Repeat</string>
+    <string name="timeStart">Time Start</string>
+    <string name="timeEnd">Time End</string>
+    <string name="reminderRime">Reminder Time</string>
+    <string name="place">Place</string>
+    <string name="reminderInfo">You will receive notification.</string>
+    <string name="start">Start</string>
+    <string name="end">End</string>
+    <string name="reminder">Reminder</string>
 
 </resources>

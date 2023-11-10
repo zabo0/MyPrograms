@@ -4,13 +4,10 @@ import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -19,9 +16,10 @@ import com.saboon.myprograms.adapter.SubjectDetailsFragmentRecyclerAdapter
 import com.saboon.myprograms.databinding.FragmentSubjectDetailsBinding
 import com.saboon.myprograms.model.ModelProgram
 import com.saboon.myprograms.model.ModelSubject
+import com.saboon.myprograms.util.dialog.AddEditEventDialogFragment
 import com.saboon.myprograms.util.dialog.AddEditSubjectDialogFragment
-import com.saboon.myprograms.viewmodel.VMFragmentProgram
-import com.saboon.myprograms.viewmodel.VMFragmentSubject
+import com.saboon.myprograms.viewmodel.VMProgram
+import com.saboon.myprograms.viewmodel.VMSubject
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -34,8 +32,8 @@ class FragmentSubjectDetails @Inject constructor(
     private var _binding: FragmentSubjectDetailsBinding?=null
     private lateinit var binding: FragmentSubjectDetailsBinding
 
-    private lateinit var viewModelProgram : VMFragmentProgram
-    private lateinit var viewModelSubject: VMFragmentSubject
+    private lateinit var viewModelProgram : VMProgram
+    private lateinit var viewModelSubject: VMSubject
 
     private lateinit var program : ModelProgram
     private lateinit var subject : ModelSubject
@@ -48,8 +46,8 @@ class FragmentSubjectDetails @Inject constructor(
         binding = FragmentSubjectDetailsBinding.bind(view)
         _binding = binding
 
-        viewModelProgram = ViewModelProvider(requireActivity())[VMFragmentProgram::class.java]
-        viewModelSubject = ViewModelProvider(requireActivity())[VMFragmentSubject::class.java]
+        viewModelProgram = ViewModelProvider(requireActivity())[VMProgram::class.java]
+        viewModelSubject = ViewModelProvider(requireActivity())[VMSubject::class.java]
 
 
         arguments?.let {
@@ -97,6 +95,11 @@ class FragmentSubjectDetails @Inject constructor(
         binding.topAppBar.setNavigationOnClickListener {
             val action = FragmentSubjectDetailsDirections.actionFragmentSubjectDetailsToFragmentSubjects(program.id)
             it.findNavController().navigate(action)
+        }
+
+        binding.addNewEventFab.setOnClickListener {
+            val addEventDialogFragment = AddEditEventDialogFragment()
+            addEventDialogFragment.show(parentFragmentManager,"dialog")
         }
 
     }

@@ -13,8 +13,16 @@ interface SubjectRepositoryInterface {
 
     fun observeAllSubject(): LiveData<List<ModelSubject>>
 
-    fun observeAllSubjectByOwner(id: String): LiveData<List<ModelSubject>?>
+    fun observeAllSubjectByOwner(ownerId: String): LiveData<List<ModelSubject>?>
 
-    suspend fun updateSubject(id: String, dateModified: String, title: String, person1: String, person2: String, person3: String, color: String)
+    suspend fun updateSubject(
+        id: String,
+        dateModified: String,
+        title: String,
+        person1: String,
+        person2: String,
+        person3: String,
+        color: String
+    )
 
 }

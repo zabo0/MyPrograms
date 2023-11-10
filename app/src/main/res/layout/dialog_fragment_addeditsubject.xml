@@ -12,7 +12,7 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/dialogFragmetn_topAppBar"
+            android:id="@+id/dialogFragment_subject_topAppBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
@@ -108,10 +108,6 @@
             android:layout_gravity="end"
             android:gravity="end"
             android:textSize="11sp"/>
-
-
-
-
     </LinearLayout>
 
     <LinearLayout

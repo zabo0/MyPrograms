@@ -13,7 +13,6 @@ import com.saboon.myprograms.R
 import com.saboon.myprograms.model.ModelProgram
 import com.saboon.myprograms.util.DateGenerator
 import com.saboon.myprograms.view.FragmentProgramsDirections
-import com.saboon.myprograms.viewmodel.VMFragmentProgram
 
 class ProgramFragmentRecyclerAdapter():RecyclerView.Adapter<ProgramFragmentRecyclerAdapter.FragmentProgramViewHolder>() {
 

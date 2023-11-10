@@ -14,8 +14,8 @@ import com.saboon.myprograms.databinding.FragmentSubjectsBinding
 import com.saboon.myprograms.model.ModelProgram
 import com.saboon.myprograms.model.ModelSubject
 import com.saboon.myprograms.util.dialog.AddEditSubjectDialogFragment
-import com.saboon.myprograms.viewmodel.VMFragmentProgram
-import com.saboon.myprograms.viewmodel.VMFragmentSubject
+import com.saboon.myprograms.viewmodel.VMProgram
+import com.saboon.myprograms.viewmodel.VMSubject
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -28,8 +28,8 @@ class FragmentSubjects @Inject constructor(
     private var _binding : FragmentSubjectsBinding?=null
     private lateinit var binding: FragmentSubjectsBinding
 
-    private lateinit var viewModelSubject: VMFragmentSubject
-    private lateinit var viewModelProgram: VMFragmentProgram
+    private lateinit var viewModelSubject: VMSubject
+    private lateinit var viewModelProgram: VMProgram
 
     private lateinit var program: ModelProgram
     private lateinit var subjects: List<ModelSubject>
@@ -40,8 +40,8 @@ class FragmentSubjects @Inject constructor(
         binding = FragmentSubjectsBinding.bind(view)
         _binding = binding
 
-        viewModelSubject = ViewModelProvider(requireActivity()).get(VMFragmentSubject::class.java)
-        viewModelProgram = ViewModelProvider(requireActivity()).get(VMFragmentProgram::class.java)
+        viewModelSubject = ViewModelProvider(requireActivity()).get(VMSubject::class.java)
+        viewModelProgram = ViewModelProvider(requireActivity()).get(VMProgram::class.java)
 
         arguments.let {
             if (it != null){
@@ -76,9 +76,6 @@ class FragmentSubjects @Inject constructor(
         dividerItemDecoration.dividerInsetEnd = 50
         dividerItemDecoration.isLastItemDecorated = false
         binding.subjectsRecyclerView.addItemDecoration(dividerItemDecoration)
-
-
-
     }
 
 

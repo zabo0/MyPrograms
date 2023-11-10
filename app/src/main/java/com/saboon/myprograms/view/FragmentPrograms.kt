@@ -16,7 +16,7 @@ import com.saboon.myprograms.model.ModelProgram
 import com.saboon.myprograms.util.DateGenerator
 import com.saboon.myprograms.util.dialog.Dialogs
 import com.saboon.myprograms.util.IdGenerator
-import com.saboon.myprograms.viewmodel.VMFragmentProgram
+import com.saboon.myprograms.viewmodel.VMProgram
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -29,14 +29,14 @@ class FragmentPrograms @Inject constructor(
 
     private var _binging: FragmentProgramsBinding?=null
 
-    private lateinit var viewModel: VMFragmentProgram
+    private lateinit var viewModel: VMProgram
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
 
-        viewModel = ViewModelProvider(requireActivity()).get(VMFragmentProgram::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(VMProgram::class.java)
 
         val binding = FragmentProgramsBinding.bind(view)
         _binging = binding

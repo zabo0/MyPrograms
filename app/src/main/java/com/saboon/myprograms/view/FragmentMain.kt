@@ -5,15 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.navigation.fragment.findNavController
 import com.saboon.myprograms.R
 import com.saboon.myprograms.adapter.MainFragmentProgramsRecyclerAdapter
 import com.saboon.myprograms.databinding.FragmentMainBinding
 import com.saboon.myprograms.model.ModelProgram
 import com.saboon.myprograms.model.ModelSubject
-import com.saboon.myprograms.viewmodel.VMFragmentProgram
-import com.saboon.myprograms.viewmodel.VMFragmentSubject
+import com.saboon.myprograms.viewmodel.VMProgram
+import com.saboon.myprograms.viewmodel.VMSubject
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -28,8 +27,8 @@ class FragmentMain @Inject constructor(
     private lateinit var binding: FragmentMainBinding
 
 
-    private lateinit var viewModelSubject: VMFragmentSubject
-    private lateinit var viewModelProgram: VMFragmentProgram
+    private lateinit var viewModelSubject: VMSubject
+    private lateinit var viewModelProgram: VMProgram
 
 
     private lateinit var program: ModelProgram
@@ -46,8 +45,8 @@ class FragmentMain @Inject constructor(
         super.onViewCreated(view, savedInstanceState)
 
 
-        viewModelProgram = ViewModelProvider(requireActivity())[VMFragmentProgram::class.java]
-        viewModelSubject = ViewModelProvider(requireActivity())[VMFragmentSubject::class.java]
+        viewModelProgram = ViewModelProvider(requireActivity())[VMProgram::class.java]
+        viewModelSubject = ViewModelProvider(requireActivity())[VMSubject::class.java]
 
         binding = FragmentMainBinding.bind(view)
         _binding = binding

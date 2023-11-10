@@ -27,14 +27,14 @@ import com.saboon.myprograms.util.CUSTOM_COLOR_8
 import com.saboon.myprograms.util.DateGenerator
 import com.saboon.myprograms.util.IdGenerator
 import com.saboon.myprograms.view.FragmentSubjectsDirections
-import com.saboon.myprograms.viewmodel.VMFragmentProgram
-import com.saboon.myprograms.viewmodel.VMFragmentSubject
+import com.saboon.myprograms.viewmodel.VMProgram
+import com.saboon.myprograms.viewmodel.VMSubject
 import kotlinx.coroutines.launch
 
 class AddEditSubjectDialogFragment(): DialogFragment() {
 
-    private lateinit var viewModelProgram: VMFragmentProgram
-    private lateinit var viewModelSubject: VMFragmentSubject
+    private lateinit var viewModelProgram: VMProgram
+    private lateinit var viewModelSubject: VMSubject
 
     private lateinit var textTitle: TextInputEditText
     private lateinit var textPerson1: TextInputEditText
@@ -79,10 +79,10 @@ class AddEditSubjectDialogFragment(): DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        viewModelProgram = ViewModelProvider(requireActivity()).get(VMFragmentProgram::class.java)
-        viewModelSubject = ViewModelProvider(requireActivity()).get(VMFragmentSubject::class.java)
+        viewModelProgram = ViewModelProvider(requireActivity()).get(VMProgram::class.java)
+        viewModelSubject = ViewModelProvider(requireActivity()).get(VMSubject::class.java)
 
-        topAppBar = view.findViewById(R.id.dialogFragmetn_topAppBar)
+        topAppBar = view.findViewById(R.id.dialogFragment_subject_topAppBar)
         textTitle = view.findViewById(R.id.dialogFragment_subjectTitle)
         textPerson1 = view.findViewById(R.id.dialogFragment_person1)
         textPerson2 = view.findViewById(R.id.dialogFragment_person2)

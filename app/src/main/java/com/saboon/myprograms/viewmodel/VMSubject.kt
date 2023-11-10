@@ -8,7 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class VMFragmentSubject @Inject constructor(
+class VMSubject @Inject constructor(
     private val repository: SubjectRepositoryInterface
 ):ViewModel(){
 
@@ -28,8 +28,8 @@ class VMFragmentSubject @Inject constructor(
         return repository.observeAllSubject()
     }
 
-    fun observeAllSubjectByOwner(id: String):LiveData<List<ModelSubject>?>{
-        return repository.observeAllSubjectByOwner(id)
+    fun observeAllSubjectByOwner(ownerId: String):LiveData<List<ModelSubject>?>{
+        return repository.observeAllSubjectByOwner(ownerId)
     }
 
     suspend fun updateSubject(newSubject: ModelSubject){
