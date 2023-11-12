@@ -107,16 +107,24 @@ class AddEditEventDialogFragment(): DialogFragment() {
         editTextStartTime.setOnClickListener {
             DateTimePickers(requireContext(), childFragmentManager).timePicker(resources.getString(R.string.timeStart), editTextStartTime.text.toString()) {
                 editTextStartTime.setText(it)
-                val hour = it.split(":")[0].toInt() + 1
-                val minute = it.split(":")[1]
-                val text = "${hour}:${minute}"
-                editTextEndTime.setText(text)
+                if (editTextEndTime.text.toString() == ""){
+                    val hour = it.split(":")[0].toInt() + 1
+                    val minute = it.split(":")[1]
+                    val text = "${hour}:${minute}"
+                    editTextEndTime.setText(text)
+                }
             }
         }
 
         editTextEndTime.setOnClickListener {
             DateTimePickers(requireContext(), childFragmentManager).timePicker(resources.getString(R.string.timeEnd), editTextEndTime.text.toString()) {
                 editTextEndTime.setText(it)
+                if(editTextStartTime.text.toString() == ""){
+                    val hour = it.split(":")[0].toInt() - 1
+                    val minute = it.split(":")[1]
+                    val text = "${hour}:${minute}"
+                    editTextStartTime.setText(text)
+                }
             }
         }
     }
@@ -131,7 +139,7 @@ class AddEditEventDialogFragment(): DialogFragment() {
         val timeEnd = DateTimeGenerator().convertDateTimeToLong(editTextEndTime.text.toString(),"HH:mm")
         val place = editTextPlace.text.toString()
         val timeReminder = 0
-        val repeat = 0
+        val repeat = 3
 
         val id = IdGenerator().generateEventId(dateCreated,ownerId)
 

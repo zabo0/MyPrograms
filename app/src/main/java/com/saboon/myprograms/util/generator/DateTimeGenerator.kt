@@ -15,6 +15,9 @@ class DateTimeGenerator {
     }
 
     fun convertDateTimeToLong(dateTime: String, pattern: String): Long{
-        return SimpleDateFormat(pattern).parse(dateTime).time
+        if (dateTime != ""){
+            return SimpleDateFormat(pattern).parse(dateTime).time
+        }
+        return 0
     }
 }

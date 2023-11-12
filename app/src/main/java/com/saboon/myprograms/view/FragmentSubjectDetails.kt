@@ -11,13 +11,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.saboon.myprograms.R
-import com.saboon.myprograms.adapter.SubjectDetailsFragmentRecyclerAdapter
+import com.saboon.myprograms.adapter.SubjectDetailsFragmentEventRecyclerAdapter
 import com.saboon.myprograms.databinding.FragmentSubjectDetailsBinding
+import com.saboon.myprograms.model.ModelEvent
 import com.saboon.myprograms.model.ModelProgram
 import com.saboon.myprograms.model.ModelSubject
 import com.saboon.myprograms.util.dialog.AddEditEventDialogFragment
 import com.saboon.myprograms.util.dialog.AddEditSubjectDialogFragment
+import com.saboon.myprograms.viewmodel.VMEvent
 import com.saboon.myprograms.viewmodel.VMProgram
 import com.saboon.myprograms.viewmodel.VMSubject
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,7 +30,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class FragmentSubjectDetails @Inject constructor(
-    private val recyclerAdapter: SubjectDetailsFragmentRecyclerAdapter
+    private val eventRecyclerAdapter: SubjectDetailsFragmentEventRecyclerAdapter
 ): Fragment(R.layout.fragment_subject_details) {
 
     private var _binding: FragmentSubjectDetailsBinding?=null
@@ -34,9 +38,11 @@ class FragmentSubjectDetails @Inject constructor(
 
     private lateinit var viewModelProgram : VMProgram
     private lateinit var viewModelSubject: VMSubject
+    private lateinit var viewModelEvent: VMEvent
 
     private lateinit var program : ModelProgram
     private lateinit var subject : ModelSubject
+    private lateinit var events: List<ModelEvent>
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,6 +54,7 @@ class FragmentSubjectDetails @Inject constructor(
 
         viewModelProgram = ViewModelProvider(requireActivity())[VMProgram::class.java]
         viewModelSubject = ViewModelProvider(requireActivity())[VMSubject::class.java]
+        viewModelEvent = ViewModelProvider(requireActivity())[VMEvent::class.java]
 
 
         arguments?.let {
@@ -60,12 +67,28 @@ class FragmentSubjectDetails @Inject constructor(
                 binding.topAppBar.subtitle = program.title
             })
 
-            viewModelSubject.observeSubject(subjectId!!).observe(viewLifecycleOwner, Observer {
-                subject = it
+            viewModelSubject.observeSubject(subjectId!!).observe(viewLifecycleOwner, Observer {subjectResult ->
+                subject = subjectResult
                 applyDataToView()
+
+                viewModelEvent.observeAllEventByOwnerId(subject.id).observe(viewLifecycleOwner, Observer {eventList ->
+                    if (eventList != null){
+                        events = eventList
+                        eventRecyclerAdapter.events = events
+                    }
+                })
             })
 
         }
+
+
+        binding.subjectDetailsRecyclerView.adapter = eventRecyclerAdapter
+        binding.subjectDetailsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        val dividerItemDecoration = MaterialDividerItemDecoration(requireContext(),1)
+        dividerItemDecoration.dividerInsetStart = 50
+        dividerItemDecoration.dividerInsetEnd = 50
+        dividerItemDecoration.isLastItemDecorated = false
+        binding.subjectDetailsRecyclerView.addItemDecoration(dividerItemDecoration)
 
 
         binding.topAppBar.setOnMenuItemClickListener {
@@ -103,7 +126,10 @@ class FragmentSubjectDetails @Inject constructor(
             addEventDialogFragment.show(parentFragmentManager,"dialog")
         }
 
+
+
     }
+
 
 
     private fun applyDataToView(){

@@ -106,5 +106,9 @@
     <string name="start">Start</string>
     <string name="end">End</string>
     <string name="reminder">Reminder</string>
+    <string name="onceInWeek">%1$s of every week</string>
+    <string name="onceInMonth">%1$s of every month</string>
+    <string name="onceInYear">%1$s of every year</string>
+    <string name="day">Day</string>
 
 </resources>

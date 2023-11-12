@@ -6,6 +6,7 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.saboon.myprograms.adapter.MainFragmentProgramsRecyclerAdapter
 import com.saboon.myprograms.adapter.ProgramFragmentRecyclerAdapter
+import com.saboon.myprograms.adapter.SubjectDetailsFragmentEventRecyclerAdapter
 import com.saboon.myprograms.adapter.SubjectDetailsFragmentRecyclerAdapter
 import com.saboon.myprograms.adapter.SubjectsFragmentRecyclerAdapter
 import com.saboon.myprograms.db.EventDAO
@@ -85,6 +86,9 @@ object AppModule {
     @Provides
     fun provideSubjectDetailsFragmentRecyclerAdapter(): SubjectDetailsFragmentRecyclerAdapter = SubjectDetailsFragmentRecyclerAdapter()
 
+    @Singleton
+    @Provides
+    fun provideSubjectDetailsFragmentEventRecyclerAdapter(): SubjectDetailsFragmentEventRecyclerAdapter = SubjectDetailsFragmentEventRecyclerAdapter()
 
 
     @Singleton

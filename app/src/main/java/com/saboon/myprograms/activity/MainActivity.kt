@@ -2,9 +2,8 @@ package com.saboon.myprograms.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.FragmentFactory
 import com.saboon.myprograms.R
-import com.saboon.myprograms.view.MyProgsFragmentFactory
+import com.saboon.myprograms.di.MyProgsFragmentFactory
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
