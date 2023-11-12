@@ -37,5 +37,8 @@ data class ModelEvent(
     val place : String,
 
     @ColumnInfo(name = "timeReminder")
-    val timeReminder: Long
+    val timeReminder: Int,
+
+    @ColumnInfo(name = "repeat")
+    val repeat: Int
 )

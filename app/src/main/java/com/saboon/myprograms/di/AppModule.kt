@@ -37,6 +37,12 @@ object AppModule {
         }
     }
 
+    private val MIGRATION_2_3 = object : Migration(2, 3) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL("ALTER TABLE `events` ADD COLUMN `repeat` INTEGER NOT NULL")
+        }
+    }
+
     @Singleton
     @Provides
     fun provideMyProgsDatabase(@ApplicationContext context: Context) = Room.databaseBuilder(
@@ -44,7 +50,7 @@ object AppModule {
         MyProgsDatabase::class.java,
         "MyProgramsDatabase"
     )
-        .addMigrations(MIGRATION_1_2)
+        .addMigrations(MIGRATION_2_3)
         .build()
 
 

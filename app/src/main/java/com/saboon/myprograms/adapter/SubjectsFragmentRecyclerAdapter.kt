@@ -3,7 +3,6 @@ package com.saboon.myprograms.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -11,7 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.saboon.myprograms.R
 import com.saboon.myprograms.model.ModelSubject
-import com.saboon.myprograms.util.DateGenerator
+import com.saboon.myprograms.util.generator.DateTimeGenerator
 import com.saboon.myprograms.view.FragmentSubjectsDirections
 
 class SubjectsFragmentRecyclerAdapter:
@@ -56,7 +55,7 @@ class SubjectsFragmentRecyclerAdapter:
 
 
         textSubjectTitle.text = subjects[position].title
-        textSubjectCreatedDate.text = DateGenerator().convertLongDateToString(subjects[position].dateCreated,"dd MMM yyyy")
+        textSubjectCreatedDate.text = DateTimeGenerator().convertLongToDateTime(subjects[position].dateCreated,"dd MMM yyyy")
 
         holder.itemView.setOnClickListener {
             val action = FragmentSubjectsDirections.actionFragmentSubjectsToFragmentSubjectDetails(subjects[position].id, subjects[position].ownerId)

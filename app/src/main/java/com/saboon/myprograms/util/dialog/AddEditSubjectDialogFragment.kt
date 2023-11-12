@@ -24,8 +24,8 @@ import com.saboon.myprograms.util.CUSTOM_COLOR_5
 import com.saboon.myprograms.util.CUSTOM_COLOR_6
 import com.saboon.myprograms.util.CUSTOM_COLOR_7
 import com.saboon.myprograms.util.CUSTOM_COLOR_8
-import com.saboon.myprograms.util.DateGenerator
-import com.saboon.myprograms.util.IdGenerator
+import com.saboon.myprograms.util.generator.DateTimeGenerator
+import com.saboon.myprograms.util.generator.IdGenerator
 import com.saboon.myprograms.view.FragmentSubjectsDirections
 import com.saboon.myprograms.viewmodel.VMProgram
 import com.saboon.myprograms.viewmodel.VMSubject
@@ -141,7 +141,7 @@ class AddEditSubjectDialogFragment(): DialogFragment() {
 
     private fun createSubject(): ModelSubject{
 
-        val dateCreated = DateGenerator().getDateInMillis()
+        val dateCreated = DateTimeGenerator().getDateInMillis()
         val ownerId = program.id
         val title = textTitle.text.toString()
         val person1 = textPerson1.text.toString()
@@ -179,7 +179,7 @@ class AddEditSubjectDialogFragment(): DialogFragment() {
         val newSubject = ModelSubject(
             subject.id,
             subject.dateCreated,
-            DateGenerator().getDateInMillis(),
+            DateTimeGenerator().getDateInMillis(),
             subject.ownerId,
             textTitle.text.toString(),
             textPerson1.text.toString(),

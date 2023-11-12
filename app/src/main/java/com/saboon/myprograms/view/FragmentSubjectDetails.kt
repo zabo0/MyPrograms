@@ -99,6 +99,7 @@ class FragmentSubjectDetails @Inject constructor(
 
         binding.addNewEventFab.setOnClickListener {
             val addEventDialogFragment = AddEditEventDialogFragment()
+            addEventDialogFragment.subjectId = subject.id
             addEventDialogFragment.show(parentFragmentManager,"dialog")
         }
 

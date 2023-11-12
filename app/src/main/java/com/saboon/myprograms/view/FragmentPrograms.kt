@@ -13,9 +13,9 @@ import com.saboon.myprograms.R
 import com.saboon.myprograms.adapter.ProgramFragmentRecyclerAdapter
 import com.saboon.myprograms.databinding.FragmentProgramsBinding
 import com.saboon.myprograms.model.ModelProgram
-import com.saboon.myprograms.util.DateGenerator
+import com.saboon.myprograms.util.generator.DateTimeGenerator
 import com.saboon.myprograms.util.dialog.Dialogs
-import com.saboon.myprograms.util.IdGenerator
+import com.saboon.myprograms.util.generator.IdGenerator
 import com.saboon.myprograms.viewmodel.VMProgram
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -65,7 +65,7 @@ class FragmentPrograms @Inject constructor(
                 Dialogs(requireActivity(), requireContext()).showEditProgramDialog(getString(R.string.edit)){ newTitle ->
                     if (newTitle != ""){
                         viewModel.viewModelScope.launch {
-                            viewModel.renameProgram(id, newTitle, DateGenerator().getDateInMillis())
+                            viewModel.renameProgram(id, newTitle, DateTimeGenerator().getDateInMillis())
                         }
                     }
                 }
@@ -83,7 +83,7 @@ class FragmentPrograms @Inject constructor(
                 if(title != ""){
                     viewModel.viewModelScope.launch {
 
-                        val dateCreated = DateGenerator().getDateInMillis()
+                        val dateCreated = DateTimeGenerator().getDateInMillis()
                         val id = IdGenerator().generateProgramId(dateCreated)
 
                         val program = ModelProgram(id,dateCreated,dateCreated,title)

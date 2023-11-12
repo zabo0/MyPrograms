@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.saboon.myprograms.R
 import com.saboon.myprograms.model.ModelProgram
-import com.saboon.myprograms.util.DateGenerator
+import com.saboon.myprograms.util.generator.DateTimeGenerator
 import com.saboon.myprograms.view.FragmentProgramsDirections
 
 class ProgramFragmentRecyclerAdapter():RecyclerView.Adapter<ProgramFragmentRecyclerAdapter.FragmentProgramViewHolder>() {
@@ -66,7 +66,7 @@ class ProgramFragmentRecyclerAdapter():RecyclerView.Adapter<ProgramFragmentRecyc
         val editButton: ImageView = holder.itemView.findViewById(R.id.programEdit)
 
         programTitle.text = programs[position].title
-        programCreatedDate.text = DateGenerator().convertLongDateToString(programs[position].dateModified, "dd MMM yyyy / HH:mm")
+        programCreatedDate.text = DateTimeGenerator().convertLongToDateTime(programs[position].dateModified, "dd MMM yyyy / HH:mm")
 
 
 
