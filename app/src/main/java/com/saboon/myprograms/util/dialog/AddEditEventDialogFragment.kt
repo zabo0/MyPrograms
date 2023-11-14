@@ -45,6 +45,9 @@ class AddEditEventDialogFragment(): DialogFragment() {
     private lateinit var subject: ModelSubject
     private lateinit var event: ModelEvent
 
+
+    private var date: Long = 0L
+
     var subjectId: String = "null"
         set(value) {
             field = value
@@ -146,23 +149,31 @@ class AddEditEventDialogFragment(): DialogFragment() {
         editTextDate.setOnClickListener {view ->
 
             if(editTextRepeat.text.toString() == "" || editTextRepeat.text.toString() == requireActivity().resources.getStringArray(R.array.repeat)[0]){
-                DatePickers(requireContext(),childFragmentManager).fullDatePicker("select day"){long ->
-                    editTextDate.setText(DateTimeGenerator().convertLongToDateTime(long,"dd MMMM yyyy"))
+                DatePickers(requireContext(),childFragmentManager).fullDatePicker("select day"){
+                    date = it
+                    editTextDate.setText(DateTimeGenerator().convertLongToDateTime(date,"dd MMMM yyyy"))
                 }
             }
 
             if (editTextRepeat.text.toString() == requireActivity().resources.getStringArray(R.array.repeat)[1]){
                 DatePickers(requireContext(),childFragmentManager).dayOfWeekPicker(view){
-                    editTextDate.setText(it)
+                    date = it
+                    editTextDate.setText(DateTimeGenerator().convertLongToDateTime(date, "EEEE"))
                 }
             }
 
             if (editTextRepeat.text.toString() == requireActivity().resources.getStringArray(R.array.repeat)[2]){
-                // TODO: make day of mont picker
+                DatePickers(requireContext(), childFragmentManager).dayOfMonthPicker {
+                    date = it
+                    editTextDate.setText(resources.getString(R.string.onceInMonth, DateTimeGenerator().convertLongToDateTime(date, "dd")))
+                }
             }
 
             if (editTextRepeat.text.toString() == requireActivity().resources.getStringArray(R.array.repeat)[3]){
-                // TODO: make year picker
+                DatePickers(requireContext(), childFragmentManager).dayOfYearPicker {
+                    date = it
+                    editTextDate.setText(resources.getString(R.string.onceInMonth, DateTimeGenerator().convertLongToDateTime(date, "dd MMMM")))
+                }
             }
         }
     }
@@ -172,21 +183,13 @@ class AddEditEventDialogFragment(): DialogFragment() {
         val ownerId = subject.id
         val title = editTextTitle.text.toString()
         val description = editTextDescription.text.toString()
-        var date = 0L
+        //date initialized in editTextDate.setOnClickListener
         val timeStart = DateTimeGenerator().convertTimeToLong(editTextStartTime.text.toString(),"HH:mm")
         val timeEnd = DateTimeGenerator().convertTimeToLong(editTextEndTime.text.toString(),"HH:mm")
         val place = editTextPlace.text.toString()
-
-
+        // TODO: burada hatirlatici olayini yap
         val timeReminder = requireActivity().resources.getStringArray(R.array.reminder).indexOf(editTextReminderTime.text.toString())
         val repeat = requireActivity().resources.getStringArray(R.array.repeat).indexOf(editTextRepeat.text.toString())
-
-        when(repeat){
-            // TODO: make here to all cases
-            1 -> {
-                //date = DateTimeGenerator().convertDateToLong(editTextDate.text.toString(), "EEEE:HH:mm") //EEEE Jan 2000 00:00
-            }
-        }
         val id = IdGenerator().generateEventId(dateCreated,ownerId)
 
         return ModelEvent(id,dateCreated, dateCreated, ownerId,title,description,date,timeStart,timeEnd,place,timeReminder,repeat)

@@ -98,10 +98,4 @@ class Dialogs(private val activity: Activity, private val context: Context){
             .show()
     }
 
-
-    fun showAddEditSubjectBottomSheetDialog(context: Context){
-        val bottomSheetDialog = BottomSheetDialog(context)
-        //val bottomSheetView = LayoutInflater.from(context).inflate(R.layout.bottom_sheet_addeditsubject)
-    }
-
 }
