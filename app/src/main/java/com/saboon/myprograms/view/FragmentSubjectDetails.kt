@@ -21,6 +21,7 @@ import com.saboon.myprograms.model.ModelProgram
 import com.saboon.myprograms.model.ModelSubject
 import com.saboon.myprograms.util.dialog.AddEditEventDialogFragment
 import com.saboon.myprograms.util.dialog.AddEditSubjectDialogFragment
+import com.saboon.myprograms.util.dialog.Dialogs
 import com.saboon.myprograms.viewmodel.VMEvent
 import com.saboon.myprograms.viewmodel.VMProgram
 import com.saboon.myprograms.viewmodel.VMSubject
@@ -101,12 +102,20 @@ class FragmentSubjectDetails @Inject constructor(
                     true
                 }
                 R.id.menu_delete_subject -> {
-                    viewModelSubject.viewModelScope.launch {
-                        viewModelSubject.deleteSubject(subject.id)
 
-                        val action = FragmentSubjectDetailsDirections.actionFragmentSubjectDetailsToFragmentSubjects(program.id)
-                        Toast.makeText(requireContext(),"deleted", Toast.LENGTH_LONG).show()
-                        findNavController().navigate(action)
+                    Dialogs(requireActivity(), requireContext()).showDeleteAlertDialog(resources.getString(R.string.delete), resources.getString(R.string.areYouSureDeleteAllEvent)){
+                        if(it){
+
+                            viewModelEvent.viewModelScope.launch {
+                                viewModelEvent.deleteAllEventByOwnerId(subject.id)
+                            }
+
+                            viewModelSubject.viewModelScope.launch {
+                                viewModelSubject.deleteSubject(subject.id)
+                                val action = FragmentSubjectDetailsDirections.actionFragmentSubjectDetailsToFragmentSubjects(program.id)
+                                findNavController().navigate(action)
+                            }
+                        }
                     }
                     true
                 }
@@ -124,6 +133,22 @@ class FragmentSubjectDetails @Inject constructor(
             val addEventDialogFragment = AddEditEventDialogFragment()
             addEventDialogFragment.subjectId = subject.id
             addEventDialogFragment.show(parentFragmentManager,"dialog")
+        }
+
+
+        eventRecyclerAdapter.setOnItemClickListener {event ->
+            Dialogs(requireActivity(),requireContext()).showEventDetailsDialog(event){
+                if(it){
+                    // TODO: edit event
+                }
+                else{
+                    Dialogs(requireActivity(), requireContext()).showDeleteAlertDialog(resources.getString(R.string.delete), resources.getString(R.string.areYouSure)){
+                        viewModelEvent.viewModelScope.launch {
+                            viewModelEvent.deleteEvent(event.id)
+                        }
+                    }
+                }
+            }
         }
 
 

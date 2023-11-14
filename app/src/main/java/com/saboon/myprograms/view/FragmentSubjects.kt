@@ -76,6 +76,7 @@ class FragmentSubjects @Inject constructor(
         dividerItemDecoration.dividerInsetEnd = 50
         dividerItemDecoration.isLastItemDecorated = false
         binding.subjectsRecyclerView.addItemDecoration(dividerItemDecoration)
+
     }
 
 

@@ -18,6 +18,10 @@ class EventRepository @Inject constructor(
         eventDAO.deleteEvent(id)
     }
 
+    override suspend fun deleteAllEventByOwnerId(ownerId: String) {
+        eventDAO.deleteAllEventByOwnerId(ownerId)
+    }
+
     override fun observeEvent(id: String): LiveData<ModelEvent> {
         return eventDAO.observeEvent(id)
     }

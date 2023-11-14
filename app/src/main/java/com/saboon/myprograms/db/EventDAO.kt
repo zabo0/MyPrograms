@@ -16,6 +16,9 @@ interface EventDAO {
     @Query("DELETE FROM events WHERE id = :id")
     suspend fun deleteEvent(id: String)
 
+    @Query("DELETE FROM events WHERE ownerId = :ownerId")
+    suspend fun deleteAllEventByOwnerId(ownerId: String)
+
     @Query("SELECT * FROM events WHERE id = :id")
     fun observeEvent(id: String): LiveData<ModelEvent>
 

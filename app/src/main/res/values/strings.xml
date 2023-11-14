@@ -94,7 +94,7 @@
     <string name="addEvent">Add Event</string>
     <string name="editSubject">Edit Subject</string>
     <string name="event">Event</string>
-    <string name="description">Description (subject, lab, practical, exam...)</string>
+    <string name="description">Description</string>
     <string name="time">Time</string>
     <string name="date">Date</string>
     <string name="Repeat">Repeat</string>
@@ -118,6 +118,8 @@
     <string name="saturday">Saturday</string>
     <string name="sunday">Sunday</string>
     <string name="selectDay">Select Day</string>
+    <string name="eventDetails">Event Details</string>
+    <string name="areYouSureDeleteAllEvent">Are you sure? All events that in this subject will delete too!</string>
 
     <string-array name="repeat">
         <item>No Repeat</item>

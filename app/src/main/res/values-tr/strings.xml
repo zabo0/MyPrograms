@@ -66,7 +66,7 @@
     <string name="negativeButton">İptal</string>
     <string name="yes">Evet</string>
     <string name="no">Hayır</string>
-    <string name="areYouSure">Emin misin:</string>
+    <string name="areYouSure">Silmek istediğine emin misin?</string>
     <string name="use_without_create_account">Hesap Açmadan Devam Et</string>
     <string name="continue_without_create_account">Hesap açmadan devam et</string>
 </resources>

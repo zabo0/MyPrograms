@@ -74,7 +74,6 @@ class ProgramFragmentRecyclerAdapter():RecyclerView.Adapter<ProgramFragmentRecyc
 
 
         deleteButton.setOnClickListener {
-
             response?.let {
                 it(programs[position].id, "delete")
             }

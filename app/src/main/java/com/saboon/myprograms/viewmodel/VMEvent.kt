@@ -20,6 +20,10 @@ class VMEvent @Inject constructor(
         repository.deleteEvent(id)
     }
 
+    suspend fun deleteAllEventByOwnerId(ownerId: String){
+        repository.deleteAllEventByOwnerId(ownerId)
+    }
+
     fun observeEvent(id: String): LiveData<ModelEvent> {
         return repository.observeEvent(id)
     }

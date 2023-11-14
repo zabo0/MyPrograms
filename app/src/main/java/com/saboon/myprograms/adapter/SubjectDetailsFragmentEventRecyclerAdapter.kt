@@ -10,11 +10,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.saboon.myprograms.R
 import com.saboon.myprograms.model.ModelEvent
 import com.saboon.myprograms.model.ModelProgram
+import com.saboon.myprograms.util.dialog.Dialogs
 import com.saboon.myprograms.util.generator.DateTimeGenerator
 
 class SubjectDetailsFragmentEventRecyclerAdapter:
     RecyclerView.Adapter<SubjectDetailsFragmentEventRecyclerAdapter.EventViewHolder>() {
     class EventViewHolder(view: View): RecyclerView.ViewHolder(view)
+
+
+    private var response : ((ModelEvent) -> Unit)? = null
 
 
     private val diffUtil = object : DiffUtil.ItemCallback<ModelEvent>() {
@@ -46,6 +50,9 @@ class SubjectDetailsFragmentEventRecyclerAdapter:
         return events.size
     }
 
+    fun setOnItemClickListener(listener: (ModelEvent) -> Unit) {
+        response = listener
+    }
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
         val textViewTimeStart: TextView = holder.itemView.findViewById(R.id.recyclerEvent_timeStart)
         val textViewTimeEnd: TextView = holder.itemView.findViewById(R.id.recyclerEvent_timeEnd)
@@ -92,5 +99,10 @@ class SubjectDetailsFragmentEventRecyclerAdapter:
 
         }
 
+        holder.itemView.setOnClickListener {
+            response?.let {
+                it(events[position])
+            }
+        }
     }
 }

@@ -10,6 +10,8 @@ interface EventRepositoryInterface {
 
     suspend fun deleteEvent(id: String)
 
+    suspend fun deleteAllEventByOwnerId(ownerId: String)
+
     fun observeEvent(id: String): LiveData<ModelEvent>
 
     fun observeAllEvent(): LiveData<List<ModelEvent>?>
