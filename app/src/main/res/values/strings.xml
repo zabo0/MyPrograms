@@ -110,5 +110,37 @@
     <string name="onceInMonth">%1$s of every month</string>
     <string name="onceInYear">%1$s of every year</string>
     <string name="day">Day</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+
+    <string-array name="repeat">
+        <item>No Repeat</item>
+        <item>Once A Week</item>
+        <item>Once A Month</item>
+        <item>Once A Year</item>
+    </string-array>
+
+    <string-array name="reminder">
+        <item>No Reminder</item>
+        <item>On Time</item>
+        <item>10 Minute Ago</item>
+        <item>30 Minute Ago</item>
+        <item>1 Hour Ago</item>
+    </string-array>
+
+    <string-array name="days">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
 
 </resources>

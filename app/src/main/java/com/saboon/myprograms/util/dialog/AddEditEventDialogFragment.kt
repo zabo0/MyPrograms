@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,7 +16,6 @@ import com.google.android.material.textfield.TextInputEditText
 import com.saboon.myprograms.R
 import com.saboon.myprograms.model.ModelEvent
 import com.saboon.myprograms.model.ModelSubject
-import com.saboon.myprograms.util.DateTimePickers
 import com.saboon.myprograms.util.generator.DateTimeGenerator
 import com.saboon.myprograms.util.generator.IdGenerator
 import com.saboon.myprograms.viewmodel.VMEvent
@@ -105,7 +106,7 @@ class AddEditEventDialogFragment(): DialogFragment() {
         }
 
         editTextStartTime.setOnClickListener {
-            DateTimePickers(requireContext(), childFragmentManager).timePicker(resources.getString(R.string.timeStart), editTextStartTime.text.toString()) {
+            TimePickers(requireContext(), childFragmentManager).timePicker(resources.getString(R.string.timeStart), editTextStartTime.text.toString()) {
                 editTextStartTime.setText(it)
                 if (editTextEndTime.text.toString() == ""){
                     val hour = it.split(":")[0].toInt() + 1
@@ -117,7 +118,7 @@ class AddEditEventDialogFragment(): DialogFragment() {
         }
 
         editTextEndTime.setOnClickListener {
-            DateTimePickers(requireContext(), childFragmentManager).timePicker(resources.getString(R.string.timeEnd), editTextEndTime.text.toString()) {
+            TimePickers(requireContext(), childFragmentManager).timePicker(resources.getString(R.string.timeEnd), editTextEndTime.text.toString()) {
                 editTextEndTime.setText(it)
                 if(editTextStartTime.text.toString() == ""){
                     val hour = it.split(":")[0].toInt() - 1
@@ -127,6 +128,43 @@ class AddEditEventDialogFragment(): DialogFragment() {
                 }
             }
         }
+
+        val repeatArray = resources.getStringArray(R.array.repeat)
+        val repeatArrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_simple_list_item, repeatArray)
+        editTextRepeat.setAdapter(repeatArrayAdapter)
+
+        val reminderArray = resources.getStringArray(R.array.reminder)
+        val reminderArrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_simple_list_item, reminderArray)
+        editTextReminderTime.setAdapter(reminderArrayAdapter)
+
+
+        editTextRepeat.addTextChangedListener {
+            editTextDate.setText("")
+        }
+
+
+        editTextDate.setOnClickListener {view ->
+
+            if(editTextRepeat.text.toString() == "" || editTextRepeat.text.toString() == requireActivity().resources.getStringArray(R.array.repeat)[0]){
+                DatePickers(requireContext(),childFragmentManager).fullDatePicker("select day"){long ->
+                    editTextDate.setText(DateTimeGenerator().convertLongToDateTime(long,"dd MMMM yyyy"))
+                }
+            }
+
+            if (editTextRepeat.text.toString() == requireActivity().resources.getStringArray(R.array.repeat)[1]){
+                DatePickers(requireContext(),childFragmentManager).dayOfWeekPicker(view){
+                    editTextDate.setText(it)
+                }
+            }
+
+            if (editTextRepeat.text.toString() == requireActivity().resources.getStringArray(R.array.repeat)[2]){
+                // TODO: make day of mont picker
+            }
+
+            if (editTextRepeat.text.toString() == requireActivity().resources.getStringArray(R.array.repeat)[3]){
+                // TODO: make year picker
+            }
+        }
     }
 
     private fun createEvent(): ModelEvent{
@@ -134,13 +172,21 @@ class AddEditEventDialogFragment(): DialogFragment() {
         val ownerId = subject.id
         val title = editTextTitle.text.toString()
         val description = editTextDescription.text.toString()
-        val date = 91723469174
-        val timeStart = DateTimeGenerator().convertDateTimeToLong(editTextStartTime.text.toString(),"HH:mm")
-        val timeEnd = DateTimeGenerator().convertDateTimeToLong(editTextEndTime.text.toString(),"HH:mm")
+        var date = 0L
+        val timeStart = DateTimeGenerator().convertTimeToLong(editTextStartTime.text.toString(),"HH:mm")
+        val timeEnd = DateTimeGenerator().convertTimeToLong(editTextEndTime.text.toString(),"HH:mm")
         val place = editTextPlace.text.toString()
-        val timeReminder = 0
-        val repeat = 3
 
+
+        val timeReminder = requireActivity().resources.getStringArray(R.array.reminder).indexOf(editTextReminderTime.text.toString())
+        val repeat = requireActivity().resources.getStringArray(R.array.repeat).indexOf(editTextRepeat.text.toString())
+
+        when(repeat){
+            // TODO: make here to all cases
+            1 -> {
+                //date = DateTimeGenerator().convertDateToLong(editTextDate.text.toString(), "EEEE:HH:mm") //EEEE Jan 2000 00:00
+            }
+        }
         val id = IdGenerator().generateEventId(dateCreated,ownerId)
 
         return ModelEvent(id,dateCreated, dateCreated, ownerId,title,description,date,timeStart,timeEnd,place,timeReminder,repeat)

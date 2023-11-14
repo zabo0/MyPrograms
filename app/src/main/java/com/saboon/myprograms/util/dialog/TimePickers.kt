@@ -1,16 +1,13 @@
-package com.saboon.myprograms.util
+package com.saboon.myprograms.util.dialog
 
 import android.content.Context
 import android.text.format.DateFormat
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.MaterialTimePicker.INPUT_MODE_CLOCK
 import com.google.android.material.timepicker.TimeFormat
-import com.saboon.myprograms.R
-import com.saboon.myprograms.util.generator.DateTimeGenerator
 
-class DateTimePickers(private val context: Context, private val fragmentManager: FragmentManager) {
+class TimePickers(private val context: Context, private val fragmentManager: FragmentManager) {
 
     private val isSystem24Hour = DateFormat.is24HourFormat(context)
     private val clockFormat = if(isSystem24Hour) TimeFormat.CLOCK_24H else TimeFormat.CLOCK_12H

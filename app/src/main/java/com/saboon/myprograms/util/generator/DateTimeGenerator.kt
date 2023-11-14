@@ -14,9 +14,16 @@ class DateTimeGenerator {
         //SimpleDateFormat("dd.MM.yyyy-HH:mm:ss").format(Calendar.getInstance().time)
     }
 
-    fun convertDateTimeToLong(dateTime: String, pattern: String): Long{
-        if (dateTime != ""){
-            return SimpleDateFormat(pattern).parse(dateTime).time
+    fun convertTimeToLong(time: String, pattern: String): Long{
+        if (time != ""){
+            return SimpleDateFormat(pattern).parse(time).time
+        }
+        return 0
+    }
+
+    fun convertDateToLong(date: String, pattern: String): Long{
+        if (date != ""){
+            return SimpleDateFormat(pattern).parse(date).time
         }
         return 0
     }
