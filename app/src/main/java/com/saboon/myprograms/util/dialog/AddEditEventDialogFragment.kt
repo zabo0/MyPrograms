@@ -175,7 +175,7 @@ class AddEditEventDialogFragment(): DialogFragment() {
 
     private fun createEvent(): ModelEvent{
         val dateCreated = DateTimeGenerator().getDateInMillis()
-        val ownerId = subject!!.id
+        val ownerId = subject.id
         val title = editTextTitle.text.toString()
         val description = editTextDescription.text.toString()
         //date initialized in editTextDate.setOnClickListener
@@ -183,8 +183,14 @@ class AddEditEventDialogFragment(): DialogFragment() {
         val timeEnd = DateTimeGenerator().convertTimeToLong(editTextEndTime.text.toString(),"HH:mm")
         val place = editTextPlace.text.toString()
         // TODO: burada hatirlatici olayini yap
-        val timeReminder = requireActivity().resources.getStringArray(R.array.reminder).indexOf(editTextReminderTime.text.toString())
-        val repeat = requireActivity().resources.getStringArray(R.array.repeat).indexOf(editTextRepeat.text.toString())
+        var timeReminder = 0
+        if(editTextReminderTime.text.toString() != ""){
+            timeReminder = requireActivity().resources.getStringArray(R.array.reminder).indexOf(editTextReminderTime.text.toString())
+        }
+        var repeat = 0
+        if(editTextRepeat.text.toString() != ""){
+            repeat = requireActivity().resources.getStringArray(R.array.repeat).indexOf(editTextRepeat.text.toString())
+        }
         val id = IdGenerator().generateEventId(dateCreated,ownerId)
 
         return ModelEvent(id,dateCreated, dateCreated, ownerId,title,description,date,timeStart,timeEnd,place,timeReminder,repeat)
@@ -200,7 +206,10 @@ class AddEditEventDialogFragment(): DialogFragment() {
         val timeEnd = DateTimeGenerator().convertTimeToLong(editTextEndTime.text.toString(),"HH:mm")
         val place = editTextPlace.text.toString()
         // TODO: burada hatirlatici olayini yap
-        val timeReminder = requireActivity().resources.getStringArray(R.array.reminder).indexOf(editTextReminderTime.text.toString())
+        var timeReminder = 0
+        if(editTextReminderTime.text.toString() != ""){
+            timeReminder = requireActivity().resources.getStringArray(R.array.reminder).indexOf(editTextReminderTime.text.toString())
+        }
         val repeat = requireActivity().resources.getStringArray(R.array.repeat).indexOf(editTextRepeat.text.toString())
 
         viewModelEvent.viewModelScope.launch {
@@ -238,11 +247,7 @@ class AddEditEventDialogFragment(): DialogFragment() {
             }
         }
 
-        if(event.timeStart == 0L || event.timeEnd == 0L){
-            editTextStartTime.setText(resources.getString(R.string.all))
-            editTextEndTime.setText(resources.getString(R.string.day))
-        }
-        else{
+        if(event.timeStart != 0L || event.timeEnd != 0L){
             editTextStartTime.setText(DateTimeGenerator().convertLongToDateTime(event.timeStart, "HH:mm"))
             editTextEndTime.setText(DateTimeGenerator().convertLongToDateTime(event.timeEnd, "HH:mm"))
         }
