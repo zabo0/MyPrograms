@@ -28,7 +28,7 @@ interface EventDAO {
     @Query("SELECT * FROM events WHERE ownerId = :ownerId")
     fun observeAllEventByOwnerId(ownerId: String): LiveData<List<ModelEvent>?>
 
-    @Query("UPDATE events SET id= :id, dateModified= :dateModified, title= :title, description= :description, date= :date, timeStart= :timeStart, timeEnd= :timeEnd, place= :place, timeReminder= :timeReminder")
+    @Query("UPDATE events SET id= :id, dateModified= :dateModified, title= :title, description= :description, date= :date, timeStart= :timeStart, timeEnd= :timeEnd, place= :place, timeReminder= :timeReminder, repeat = :repeat")
     suspend fun updateEvent(
         id: String,
         dateModified: Long,
@@ -38,6 +38,7 @@ interface EventDAO {
         timeStart: Long,
         timeEnd: Long,
         place: String,
-        timeReminder: Long
+        timeReminder: Int,
+        repeat: Int
     )
 }

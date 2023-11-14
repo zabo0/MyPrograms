@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.google.android.material.appbar.MaterialToolbar
@@ -19,14 +18,10 @@ import com.saboon.myprograms.model.ModelSubject
 import com.saboon.myprograms.util.generator.DateTimeGenerator
 import com.saboon.myprograms.util.generator.IdGenerator
 import com.saboon.myprograms.viewmodel.VMEvent
-import com.saboon.myprograms.viewmodel.VMProgram
-import com.saboon.myprograms.viewmodel.VMSubject
 import kotlinx.coroutines.launch
 
 class AddEditEventDialogFragment(): DialogFragment() {
 
-    private lateinit var viewModelProgram: VMProgram
-    private lateinit var viewModelSubject: VMSubject
     private lateinit var viewModelEvent: VMEvent
 
     private lateinit var topAppBar : MaterialToolbar
@@ -42,21 +37,11 @@ class AddEditEventDialogFragment(): DialogFragment() {
 
 
 
-    private lateinit var subject: ModelSubject
-    private lateinit var event: ModelEvent
-
-
     private var date: Long = 0L
 
-    var subjectId: String = "null"
-        set(value) {
-            field = value
-        }
+    lateinit var subject: ModelSubject
 
-    var eventId: String = "null"
-        set(value) {
-            field = value
-        }
+    var event: ModelEvent? = null
 
 
     override fun onCreateView(
@@ -69,8 +54,6 @@ class AddEditEventDialogFragment(): DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModelProgram = ViewModelProvider(requireActivity())[VMProgram::class.java]
-        viewModelSubject = ViewModelProvider(requireActivity())[VMSubject::class.java]
         viewModelEvent = ViewModelProvider(requireActivity())[VMEvent::class.java]
 
         topAppBar = view.findViewById(R.id.dialogFragment_event_topAppBar)
@@ -85,18 +68,35 @@ class AddEditEventDialogFragment(): DialogFragment() {
 
 
 
-        viewModelSubject.observeSubject(subjectId).observe(viewLifecycleOwner, Observer {
-            subject = it
-            topAppBar.subtitle = subject.title
-        })
+        topAppBar.subtitle = subject.title
+
+
+
+        val repeatArray = resources.getStringArray(R.array.repeat)
+        val repeatArrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_simple_list_item, repeatArray)
+        editTextRepeat.setAdapter(repeatArrayAdapter)
+
+        val reminderArray = resources.getStringArray(R.array.reminder)
+        val reminderArrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_simple_list_item, reminderArray)
+        editTextReminderTime.setAdapter(reminderArrayAdapter)
+
+
+        if (event != null){
+            applyDataToView(event!!)
+            topAppBar.title = resources.getString(R.string.editEvent)
+        }
 
         topAppBar.setOnMenuItemClickListener {
             when(it.itemId){
                 R.id.menu_save -> {
-                    if (eventId != "null"){
+                    if (event != null){
                         // TODO: update event
+                        updateEvent()
+                        dialog?.dismiss()
                     }else{
-                        create()
+                        //create new event
+                        saveToDatabase(createEvent())
+                        dialog?.dismiss()
                     }
                     true
                 }
@@ -131,15 +131,6 @@ class AddEditEventDialogFragment(): DialogFragment() {
                 }
             }
         }
-
-        val repeatArray = resources.getStringArray(R.array.repeat)
-        val repeatArrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_simple_list_item, repeatArray)
-        editTextRepeat.setAdapter(repeatArrayAdapter)
-
-        val reminderArray = resources.getStringArray(R.array.reminder)
-        val reminderArrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_simple_list_item, reminderArray)
-        editTextReminderTime.setAdapter(reminderArrayAdapter)
-
 
         editTextRepeat.addTextChangedListener {
             editTextDate.setText("")
@@ -176,11 +167,15 @@ class AddEditEventDialogFragment(): DialogFragment() {
                 }
             }
         }
+
+
+
+
     }
 
     private fun createEvent(): ModelEvent{
         val dateCreated = DateTimeGenerator().getDateInMillis()
-        val ownerId = subject.id
+        val ownerId = subject!!.id
         val title = editTextTitle.text.toString()
         val description = editTextDescription.text.toString()
         //date initialized in editTextDate.setOnClickListener
@@ -195,13 +190,65 @@ class AddEditEventDialogFragment(): DialogFragment() {
         return ModelEvent(id,dateCreated, dateCreated, ownerId,title,description,date,timeStart,timeEnd,place,timeReminder,repeat)
     }
 
-    private fun create(){
-        event = createEvent()
+    private fun updateEvent(){
+        val id = event!!.id
+        val dateModified = DateTimeGenerator().getDateInMillis()
+        val title = editTextTitle.text.toString()
+        val description = editTextDescription.text.toString()
+        //date initialized in editTextDate.setOnClickListener
+        val timeStart = DateTimeGenerator().convertTimeToLong(editTextStartTime.text.toString(),"HH:mm")
+        val timeEnd = DateTimeGenerator().convertTimeToLong(editTextEndTime.text.toString(),"HH:mm")
+        val place = editTextPlace.text.toString()
+        // TODO: burada hatirlatici olayini yap
+        val timeReminder = requireActivity().resources.getStringArray(R.array.reminder).indexOf(editTextReminderTime.text.toString())
+        val repeat = requireActivity().resources.getStringArray(R.array.repeat).indexOf(editTextRepeat.text.toString())
+
+        viewModelEvent.viewModelScope.launch {
+            viewModelEvent.updateEvent(id,dateModified,title,description,date,timeStart,timeEnd,place,timeReminder, repeat)
+        }
+    }
+
+    private fun saveToDatabase(event: ModelEvent){
         viewModelEvent.viewModelScope.launch {
             viewModelEvent.insertEvent(event)
-
-            dialog?.dismiss()
+            //dialog?.dismiss()
         }
+    }
+
+    private fun applyDataToView(event: ModelEvent){
+        editTextTitle.setText(event.title)
+        editTextDescription.setText(event.description)
+        editTextRepeat.setText(requireActivity().resources.getStringArray(R.array.repeat)[event.repeat], false)
+        when(event.repeat){
+            0 -> {//no repeat
+                val date = DateTimeGenerator().convertLongToDateTime(event.date, "dd MMMM yyyy")
+                editTextDate.setText(date)
+            }
+            1 -> {//once in a week
+                val date = DateTimeGenerator().convertLongToDateTime(event.date, "EEEE")
+                editTextDate.setText(resources.getString(R.string.onceInWeek, date))
+            }
+            2 -> {//once in a month
+                val date = DateTimeGenerator().convertLongToDateTime(event.date, "dd")
+                editTextDate.setText(resources.getString(R.string.onceInMonth, date))
+            }
+            3 -> {//once in a year
+                val date = DateTimeGenerator().convertLongToDateTime(event.date, "dd MMMM")
+                editTextDate.setText(resources.getString(R.string.onceInYear, date))
+            }
+        }
+
+        if(event.timeStart == 0L || event.timeEnd == 0L){
+            editTextStartTime.setText(resources.getString(R.string.all))
+            editTextEndTime.setText(resources.getString(R.string.day))
+        }
+        else{
+            editTextStartTime.setText(DateTimeGenerator().convertLongToDateTime(event.timeStart, "HH:mm"))
+            editTextEndTime.setText(DateTimeGenerator().convertLongToDateTime(event.timeEnd, "HH:mm"))
+        }
+
+        editTextReminderTime.setText(resources.getStringArray(R.array.reminder)[event.timeReminder],false)
+        editTextPlace.setText(event.place)
     }
 
     override fun getTheme(): Int {

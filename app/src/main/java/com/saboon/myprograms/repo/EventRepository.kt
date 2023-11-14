@@ -43,7 +43,8 @@ class EventRepository @Inject constructor(
         timeStart: Long,
         timeEnd: Long,
         place: String,
-        timeReminder: Long
+        timeReminder: Int,
+        repeat: Int
     ) {
         eventDAO.updateEvent(
             id,
@@ -54,7 +55,8 @@ class EventRepository @Inject constructor(
             timeStart,
             timeEnd,
             place,
-            timeReminder
+            timeReminder,
+            repeat
         )
     }
 }

@@ -5,7 +5,6 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -131,17 +130,23 @@ class FragmentSubjectDetails @Inject constructor(
 
         binding.addNewEventFab.setOnClickListener {
             val addEventDialogFragment = AddEditEventDialogFragment()
-            addEventDialogFragment.subjectId = subject.id
+            addEventDialogFragment.subject = subject
             addEventDialogFragment.show(parentFragmentManager,"dialog")
         }
 
 
         eventRecyclerAdapter.setOnItemClickListener {event ->
             Dialogs(requireActivity(),requireContext()).showEventDetailsDialog(event){
-                if(it){
+                if(it != null){
                     // TODO: edit event
+                    //edit event
+                    val editEventDialogFragment = AddEditEventDialogFragment()
+                    editEventDialogFragment.subject = subject
+                    editEventDialogFragment.event = it
+                    editEventDialogFragment.show(parentFragmentManager, "dialog")
                 }
                 else{
+                    //delete event
                     Dialogs(requireActivity(), requireContext()).showDeleteAlertDialog(resources.getString(R.string.delete), resources.getString(R.string.areYouSure)){
                         viewModelEvent.viewModelScope.launch {
                             viewModelEvent.deleteEvent(event.id)

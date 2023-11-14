@@ -79,8 +79,8 @@ class AddEditSubjectDialogFragment(): DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        viewModelProgram = ViewModelProvider(requireActivity()).get(VMProgram::class.java)
-        viewModelSubject = ViewModelProvider(requireActivity()).get(VMSubject::class.java)
+        viewModelProgram = ViewModelProvider(requireActivity())[VMProgram::class.java]
+        viewModelSubject = ViewModelProvider(requireActivity())[VMSubject::class.java]
 
         topAppBar = view.findViewById(R.id.dialogFragment_subject_topAppBar)
         textTitle = view.findViewById(R.id.dialogFragment_subjectTitle)

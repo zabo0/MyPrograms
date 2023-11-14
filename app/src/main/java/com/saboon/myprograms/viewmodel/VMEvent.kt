@@ -45,7 +45,8 @@ class VMEvent @Inject constructor(
         timeStart: Long,
         timeEnd: Long,
         place: String,
-        timeReminder: Long
+        timeReminder: Int,
+        repeat: Int
     ) {
         repository.updateEvent(
             id,
@@ -56,7 +57,8 @@ class VMEvent @Inject constructor(
             timeStart,
             timeEnd,
             place,
-            timeReminder
+            timeReminder,
+            repeat
         )
     }
 

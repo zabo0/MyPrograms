@@ -120,6 +120,7 @@
     <string name="selectDay">Select Day</string>
     <string name="eventDetails">Event Details</string>
     <string name="areYouSureDeleteAllEvent">Are you sure? All events that in this subject will delete too!</string>
+    <string name="editEvent">Edit Event</string>
 
     <string-array name="repeat">
         <item>No Repeat</item>

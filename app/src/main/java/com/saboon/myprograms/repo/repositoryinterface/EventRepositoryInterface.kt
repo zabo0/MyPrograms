@@ -27,6 +27,7 @@ interface EventRepositoryInterface {
         timeStart: Long,
         timeEnd: Long,
         place: String,
-        timeReminder: Long
+        timeReminder: Int,
+        repeat: Int
     )
 }

@@ -104,7 +104,7 @@ class Dialogs(private val activity: Activity, private val context: Context){
             .show()
     }
 
-    fun showEventDetailsDialog(event: ModelEvent, callback: (Boolean) -> Unit){
+    fun showEventDetailsDialog(event: ModelEvent, callback: (ModelEvent?) -> Unit){
         val dialogLayout = LayoutInflater.from(context).inflate(R.layout.dialog_event_details, null)
 
         val titleText: TextView = dialogLayout.findViewById(R.id.eventDetailsDialog_title)
@@ -157,7 +157,7 @@ class Dialogs(private val activity: Activity, private val context: Context){
             .create()
 
         editButton.setOnClickListener {
-            callback(true)
+            callback(event)
             alertDialog.cancel()
         }
 
@@ -166,7 +166,7 @@ class Dialogs(private val activity: Activity, private val context: Context){
         }
 
         deleteButton.setOnClickListener {
-            callback(false)
+            callback(null)
             alertDialog.cancel()
         }
 
