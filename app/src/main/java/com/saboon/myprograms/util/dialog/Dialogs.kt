@@ -123,8 +123,8 @@ class Dialogs(private val activity: Activity, private val context: Context){
         if(event.description != "") descriptionText.text = event.description
 
         if(event.timeStart == 0L || event.timeEnd == 0L){
-            startTimeText.text = dialogLayout.resources.getString(R.string.all)
-            endTimeText.text = dialogLayout.resources.getString(R.string.day)
+            startTimeText.text = "-"//dialogLayout.resources.getString(R.string.all)
+            endTimeText.text = "-"//dialogLayout.resources.getString(R.string.day)
         }
         else{
             startTimeText.text = DateTimeGenerator().convertLongToDateTime(event.timeStart, "HH:mm")

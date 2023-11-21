@@ -25,12 +25,13 @@ class SubjectsFragmentRecyclerAdapter:
         override fun areContentsTheSame(oldItem: ModelSubject, newItem: ModelSubject): Boolean {
             return oldItem == newItem
         }
-
-
     }
 
     private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
 
+    // TODO: listeden bir item silindiginde tahminimce burada listenin boyutu guncellenmiyor.
+    //  silinen itemden sonra gelen itemlerin indis numaralari bir azalmasi gerekirken ayni kaliyor.
+    //  boylece en son itemi acmaya calisinca arrayoutofbount hatasi aliyor.
 
     var subjects: List<ModelSubject>
         get() = recyclerListDiffer.currentList
@@ -61,7 +62,5 @@ class SubjectsFragmentRecyclerAdapter:
             val action = FragmentSubjectsDirections.actionFragmentSubjectsToFragmentSubjectDetails(subjects[position].id, subjects[position].ownerId)
             it.findNavController().navigate(action)
         }
-
-
     }
 }

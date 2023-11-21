@@ -38,9 +38,10 @@ class AddEditEventDialogFragment(): DialogFragment() {
 
 
     private var date: Long = 0L
+    private var isDateChanged = false //date bilgisinin kullanici tarafindan degistirilip degistiriledigini kontrol eder
+
 
     lateinit var subject: ModelSubject
-
     var event: ModelEvent? = null
 
 
@@ -142,6 +143,7 @@ class AddEditEventDialogFragment(): DialogFragment() {
             if(editTextRepeat.text.toString() == "" || editTextRepeat.text.toString() == requireActivity().resources.getStringArray(R.array.repeat)[0]){
                 DatePickers(requireContext(),childFragmentManager).fullDatePicker("select day"){
                     date = it
+                    isDateChanged = true
                     editTextDate.setText(DateTimeGenerator().convertLongToDateTime(date,"dd MMMM yyyy"))
                 }
             }
@@ -149,6 +151,7 @@ class AddEditEventDialogFragment(): DialogFragment() {
             if (editTextRepeat.text.toString() == requireActivity().resources.getStringArray(R.array.repeat)[1]){
                 DatePickers(requireContext(),childFragmentManager).dayOfWeekPicker(view){
                     date = it
+                    isDateChanged = true
                     editTextDate.setText(DateTimeGenerator().convertLongToDateTime(date, "EEEE"))
                 }
             }
@@ -156,6 +159,7 @@ class AddEditEventDialogFragment(): DialogFragment() {
             if (editTextRepeat.text.toString() == requireActivity().resources.getStringArray(R.array.repeat)[2]){
                 DatePickers(requireContext(), childFragmentManager).dayOfMonthPicker {
                     date = it
+                    isDateChanged = true
                     editTextDate.setText(resources.getString(R.string.onceInMonth, DateTimeGenerator().convertLongToDateTime(date, "dd")))
                 }
             }
@@ -163,6 +167,7 @@ class AddEditEventDialogFragment(): DialogFragment() {
             if (editTextRepeat.text.toString() == requireActivity().resources.getStringArray(R.array.repeat)[3]){
                 DatePickers(requireContext(), childFragmentManager).dayOfYearPicker {
                     date = it
+                    isDateChanged = true
                     editTextDate.setText(resources.getString(R.string.onceInMonth, DateTimeGenerator().convertLongToDateTime(date, "dd MMMM")))
                 }
             }
@@ -172,6 +177,7 @@ class AddEditEventDialogFragment(): DialogFragment() {
 
 
     }
+
 
     private fun createEvent(): ModelEvent{
         val dateCreated = DateTimeGenerator().getDateInMillis()
@@ -202,6 +208,9 @@ class AddEditEventDialogFragment(): DialogFragment() {
         val title = editTextTitle.text.toString()
         val description = editTextDescription.text.toString()
         //date initialized in editTextDate.setOnClickListener
+        if(!isDateChanged){
+            date = event!!.date
+        }
         val timeStart = DateTimeGenerator().convertTimeToLong(editTextStartTime.text.toString(),"HH:mm")
         val timeEnd = DateTimeGenerator().convertTimeToLong(editTextEndTime.text.toString(),"HH:mm")
         val place = editTextPlace.text.toString()
