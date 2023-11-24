@@ -51,6 +51,7 @@ object AppModule {
         MyProgsDatabase::class.java,
         "MyProgramsDatabase"
     )
+        .addMigrations(MIGRATION_1_2)
         .addMigrations(MIGRATION_2_3)
         .build()
 

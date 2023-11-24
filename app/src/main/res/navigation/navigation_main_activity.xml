@@ -12,7 +12,8 @@
         tools:layout="@layout/fragment_main" >
         <action
             android:id="@+id/action_fragmentMain_to_programsFragment"
-            app:destination="@id/programsFragment" />
+            app:destination="@id/programsFragment"
+            app:enterAnim="@android:anim/slide_in_left" />
         <action
             android:id="@+id/action_fragmentMain_to_fragmentSubjects"
             app:destination="@id/fragmentSubjects" />
@@ -30,7 +31,10 @@
         tools:layout="@layout/fragment_programs" >
         <action
             android:id="@+id/action_programsFragment_to_fragmentMain"
-            app:destination="@id/fragmentMain" />
+            app:destination="@id/fragmentMain"
+            app:enterAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/programsFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/fragmentSubjects"

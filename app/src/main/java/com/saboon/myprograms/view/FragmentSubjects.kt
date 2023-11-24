@@ -3,6 +3,7 @@ package com.saboon.myprograms.view
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -55,6 +56,17 @@ class FragmentSubjects @Inject constructor(
                 })
             }
         }
+
+        val callBack = object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                val action = FragmentSubjectsDirections.actionFragmentSubjectsToFragmentMain(program.id)
+                findNavController().navigate(action)
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(callBack)
+
+
         binding.topAppBar.setNavigationOnClickListener {
             val action = FragmentSubjectsDirections.actionFragmentSubjectsToFragmentMain(program.id)
             findNavController().navigate(action)
@@ -90,6 +102,7 @@ class FragmentSubjects @Inject constructor(
             }
         })
     }
+
 
 
     override fun onDestroy() {
