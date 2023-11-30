@@ -26,7 +26,4 @@ interface ProgramDAO {
     @Query("UPDATE programs SET title = :newTitle , dateModified = :newDate WHERE id = :id")
     suspend fun renameProgram(id: String, newTitle: String, newDate: Long)
 
-
-
-
 }
