@@ -17,6 +17,7 @@ class SubjectDetailsFragmentEventRecyclerAdapter:
     RecyclerView.Adapter<SubjectDetailsFragmentEventRecyclerAdapter.EventViewHolder>() {
     class EventViewHolder(view: View): RecyclerView.ViewHolder(view)
 
+    //bu adaptor subject detailsteki event listesini ayarlar
 
     private var response : ((ModelEvent) -> Unit)? = null
 

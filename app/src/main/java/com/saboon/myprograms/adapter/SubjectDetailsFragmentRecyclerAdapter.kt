@@ -15,7 +15,7 @@ class SubjectDetailsFragmentRecyclerAdapter:
     RecyclerView.Adapter<SubjectDetailsFragmentRecyclerAdapter.SubjectDetailsViewHolder>() {
     class SubjectDetailsViewHolder(view: View): RecyclerView.ViewHolder(view)
 
-
+//bu adapter silinecek
 
     private val diffUtil = object : DiffUtil.ItemCallback<ModelSubject>() {
         override fun areItemsTheSame(oldItem: ModelSubject, newItem: ModelSubject): Boolean {

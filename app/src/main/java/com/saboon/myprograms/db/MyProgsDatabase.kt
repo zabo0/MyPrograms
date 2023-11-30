@@ -8,7 +8,7 @@ import com.saboon.myprograms.model.ModelEvent
 import com.saboon.myprograms.model.ModelProgram
 import com.saboon.myprograms.model.ModelSubject
 
-@Database(entities = [ModelProgram::class, ModelSubject::class, ModelEvent::class], version = 3, exportSchema = false)
+@Database(entities = [ModelProgram::class, ModelSubject::class, ModelEvent::class], version = 5, exportSchema = false)
 abstract class MyProgsDatabase():RoomDatabase() {
     abstract fun programDao(): ProgramDAO
     abstract fun subjectDao(): SubjectDAO

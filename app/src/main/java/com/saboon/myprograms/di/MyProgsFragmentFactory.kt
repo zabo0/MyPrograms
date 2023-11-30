@@ -14,7 +14,6 @@ import com.saboon.myprograms.view.FragmentSubjects
 import javax.inject.Inject
 
 class MyProgsFragmentFactory @Inject constructor(
-     private val progRecycAdapter: MainFragmentProgramsRecyclerAdapter,
      private val programFragmentRcyclerAdapter: ProgramFragmentRecyclerAdapter,
     private val subjectsFragmentRecyclerAdapter: SubjectsFragmentRecyclerAdapter,
     private val subjectDetailsFragmentRecyclerAdapter: SubjectDetailsFragmentEventRecyclerAdapter
@@ -23,7 +22,7 @@ class MyProgsFragmentFactory @Inject constructor(
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
 
         return when(className){
-            FragmentMain::class.java.name -> FragmentMain(progRecycAdapter)
+            //FragmentMain::class.java.name -> FragmentMain(progRecycAdapter)
             FragmentPrograms::class.java.name -> FragmentPrograms(programFragmentRcyclerAdapter)
             FragmentSubjects::class.java.name -> FragmentSubjects(subjectsFragmentRecyclerAdapter)
             FragmentSubjectDetails::class.java.name -> FragmentSubjectDetails(subjectDetailsFragmentRecyclerAdapter)

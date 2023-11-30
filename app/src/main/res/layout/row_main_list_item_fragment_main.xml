@@ -13,6 +13,7 @@
         android:layout_marginEnd="8dp"
         android:orientation="horizontal">
         <TextView
+            android:id="@+id/mainFragmentRecyclerView_dayName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Monday"
@@ -21,6 +22,7 @@
             android:textAlignment="textStart"
             android:textSize="16sp"/>
         <TextView
+            android:id="@+id/mainFragmentRecyclerView_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="04 October 2022"
@@ -30,6 +32,7 @@
             android:textSize="16sp"/>
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mainFragmentRecyclerView_recyclerView"
         android:layout_width="match_parent"
         android:layout_margin="8dp"
         tools:listitem="@layout/row_main_list_child_fragment_main"

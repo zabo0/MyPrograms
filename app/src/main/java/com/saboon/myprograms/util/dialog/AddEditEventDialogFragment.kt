@@ -140,7 +140,7 @@ class AddEditEventDialogFragment(): DialogFragment() {
 
         editTextDate.setOnClickListener {view ->
 
-            if(editTextRepeat.text.toString() == "" || editTextRepeat.text.toString() == requireActivity().resources.getStringArray(R.array.repeat)[0]){
+            if(editTextRepeat.text.toString() == "" || editTextRepeat.text.toString() == requireActivity().resources.getStringArray(R.array.repeat)[0]){ //no repeat
                 DatePickers(requireContext(),childFragmentManager).fullDatePicker("select day"){
                     date = it
                     isDateChanged = true
@@ -148,7 +148,7 @@ class AddEditEventDialogFragment(): DialogFragment() {
                 }
             }
 
-            if (editTextRepeat.text.toString() == requireActivity().resources.getStringArray(R.array.repeat)[1]){
+            if (editTextRepeat.text.toString() == requireActivity().resources.getStringArray(R.array.repeat)[1]){//once a week
                 DatePickers(requireContext(),childFragmentManager).dayOfWeekPicker(view){
                     date = it
                     isDateChanged = true
@@ -156,7 +156,7 @@ class AddEditEventDialogFragment(): DialogFragment() {
                 }
             }
 
-            if (editTextRepeat.text.toString() == requireActivity().resources.getStringArray(R.array.repeat)[2]){
+            if (editTextRepeat.text.toString() == requireActivity().resources.getStringArray(R.array.repeat)[2]){//once a month
                 DatePickers(requireContext(), childFragmentManager).dayOfMonthPicker {
                     date = it
                     isDateChanged = true
@@ -164,7 +164,7 @@ class AddEditEventDialogFragment(): DialogFragment() {
                 }
             }
 
-            if (editTextRepeat.text.toString() == requireActivity().resources.getStringArray(R.array.repeat)[3]){
+            if (editTextRepeat.text.toString() == requireActivity().resources.getStringArray(R.array.repeat)[3]){//once a year
                 DatePickers(requireContext(), childFragmentManager).dayOfYearPicker {
                     date = it
                     isDateChanged = true
@@ -199,7 +199,7 @@ class AddEditEventDialogFragment(): DialogFragment() {
         }
         val id = IdGenerator().generateEventId(dateCreated,ownerId)
 
-        return ModelEvent(id,dateCreated, dateCreated, ownerId,title,description,date,timeStart,timeEnd,place,timeReminder,repeat)
+        return ModelEvent(id,dateCreated, dateCreated, ownerId,title,description,date,timeStart,timeEnd,place,timeReminder,repeat, subject.ownerId)
     }
 
     private fun updateEvent(){

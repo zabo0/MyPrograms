@@ -25,6 +25,7 @@ class ProgramFragmentRecyclerAdapter():RecyclerView.Adapter<ProgramFragmentRecyc
 
 
 
+    //bu adaptor program fragmentinin listesini ayarlar
 
     private val diffUtil = object : DiffUtil.ItemCallback<ModelProgram>() {
         override fun areItemsTheSame(oldItem: ModelProgram, newItem: ModelProgram): Boolean {

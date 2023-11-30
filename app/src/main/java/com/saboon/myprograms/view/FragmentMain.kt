@@ -9,8 +9,10 @@ import androidx.navigation.fragment.findNavController
 import com.saboon.myprograms.R
 import com.saboon.myprograms.adapter.MainFragmentProgramsRecyclerAdapter
 import com.saboon.myprograms.databinding.FragmentMainBinding
+import com.saboon.myprograms.model.ModelEvent
 import com.saboon.myprograms.model.ModelProgram
 import com.saboon.myprograms.model.ModelSubject
+import com.saboon.myprograms.viewmodel.VMEvent
 import com.saboon.myprograms.viewmodel.VMProgram
 import com.saboon.myprograms.viewmodel.VMSubject
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,7 +21,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class FragmentMain @Inject constructor(
-    private val mainDrawerProgramRecyclerAdapter: MainFragmentProgramsRecyclerAdapter
+    //private val mainDrawerProgramRecyclerAdapter: MainFragmentProgramsRecyclerAdapter
 ): Fragment(R.layout.fragment_main) {
 
 
@@ -29,10 +31,12 @@ class FragmentMain @Inject constructor(
 
     private lateinit var viewModelSubject: VMSubject
     private lateinit var viewModelProgram: VMProgram
+    private lateinit var viewModelEvent: VMEvent
 
 
     private lateinit var program: ModelProgram
     private lateinit var subjects: List<ModelSubject>
+    private lateinit var events: List<ModelEvent>
 
 
 
@@ -101,8 +105,6 @@ class FragmentMain @Inject constructor(
 
 
 
-
-
     }
 
 
@@ -120,7 +122,6 @@ class FragmentMain @Inject constructor(
                 }
             }
         })
-
     }
 
 

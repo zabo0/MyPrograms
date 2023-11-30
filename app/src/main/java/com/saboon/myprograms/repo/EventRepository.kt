@@ -31,7 +31,7 @@ class EventRepository @Inject constructor(
     }
 
     override fun observeAllEventByOwnerId(ownerId: String): LiveData<List<ModelEvent>?> {
-        return eventDAO.observeAllEventByOwnerId(ownerId)
+        return eventDAO.observeAllEventByOwnerSubjectId(ownerId)
     }
 
     override suspend fun updateEvent(

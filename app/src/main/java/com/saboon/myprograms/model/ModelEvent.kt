@@ -15,8 +15,8 @@ data class ModelEvent(
     @ColumnInfo(name = "dateModified")
     val dateModified: Long,
 
-    @ColumnInfo(name = "ownerId")
-    val ownerId : String,
+    @ColumnInfo(name = "ownerSubjectId")
+    val ownerSubjectId : String,
 
     @ColumnInfo(name = "title")
     val title: String,
@@ -40,5 +40,8 @@ data class ModelEvent(
     val timeReminder: Int,
 
     @ColumnInfo(name = "repeat")
-    val repeat: Int
+    val repeat: Int,
+
+    @ColumnInfo(name = "ownerProgramId")
+    val ownerProgramId: String
 )

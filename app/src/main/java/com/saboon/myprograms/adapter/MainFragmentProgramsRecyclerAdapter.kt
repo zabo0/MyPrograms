@@ -16,6 +16,8 @@ class MainFragmentProgramsRecyclerAdapter: RecyclerView.Adapter<MainFragmentProg
 
     class MFPViewHolder(view: View):RecyclerView.ViewHolder(view)
 
+    //bu adapter silinecek
+
     private val diffUtil = object : DiffUtil.ItemCallback<ModelProgram>() {
         override fun areItemsTheSame(oldItem: ModelProgram, newItem: ModelProgram): Boolean {
             return oldItem == newItem
@@ -24,8 +26,6 @@ class MainFragmentProgramsRecyclerAdapter: RecyclerView.Adapter<MainFragmentProg
         override fun areContentsTheSame(oldItem: ModelProgram, newItem: ModelProgram): Boolean {
             return oldItem == newItem
         }
-
-
     }
 
     private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)

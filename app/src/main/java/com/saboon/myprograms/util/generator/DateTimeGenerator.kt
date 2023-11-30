@@ -27,4 +27,9 @@ class DateTimeGenerator {
         }
         return 0
     }
+
+    fun getWeek():Int{
+        val c = Calendar.getInstance()
+        return SimpleDateFormat("ww").format(c.timeInMillis).toInt()
+    }
 }

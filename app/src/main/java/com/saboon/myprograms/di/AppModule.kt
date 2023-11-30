@@ -4,10 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.saboon.myprograms.adapter.MainFragmentProgramsRecyclerAdapter
 import com.saboon.myprograms.adapter.ProgramFragmentRecyclerAdapter
 import com.saboon.myprograms.adapter.SubjectDetailsFragmentEventRecyclerAdapter
-import com.saboon.myprograms.adapter.SubjectDetailsFragmentRecyclerAdapter
 import com.saboon.myprograms.adapter.SubjectsFragmentRecyclerAdapter
 import com.saboon.myprograms.db.EventDAO
 import com.saboon.myprograms.db.MyProgsDatabase
@@ -44,6 +42,20 @@ object AppModule {
         }
     }
 
+    private val MIGRATION_3_4 = object : Migration(3,4){
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL("ALTER TABLE `events` RENAME COLUMN `ownerId` TO `ownerSubjectId`")
+        }
+
+    }
+
+    private val MIGRATION_4_5 = object : Migration(4,5){
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL("ALTER TABLE `events` ADD COLUMN `ownerProgramId` TEXT NOT NULL DEFAULT ``")
+        }
+
+    }
+
     @Singleton
     @Provides
     fun provideMyProgsDatabase(@ApplicationContext context: Context) = Room.databaseBuilder(
@@ -51,7 +63,10 @@ object AppModule {
         MyProgsDatabase::class.java,
         "MyProgramsDatabase"
     )
+        .addMigrations(MIGRATION_1_2)
         .addMigrations(MIGRATION_2_3)
+        .addMigrations(MIGRATION_3_4)
+        .addMigrations(MIGRATION_4_5)
         .build()
 
 
@@ -68,9 +83,9 @@ object AppModule {
     fun provideEventDao(db: MyProgsDatabase) = db.eventDao()
 
 
-    @Singleton
-    @Provides
-    fun provideMainFragmentProgramRecyclerAdapter() : MainFragmentProgramsRecyclerAdapter = MainFragmentProgramsRecyclerAdapter()
+//    @Singleton
+//    @Provides
+//    fun provideMainFragmentProgramRecyclerAdapter() : MainFragmentProgramsRecyclerAdapter = MainFragmentProgramsRecyclerAdapter()
 
 
     @Singleton
@@ -81,10 +96,10 @@ object AppModule {
     @Provides
     fun provideSubjectsFragmentRecyclerAdapter(): SubjectsFragmentRecyclerAdapter = SubjectsFragmentRecyclerAdapter()
 
-
-    @Singleton
-    @Provides
-    fun provideSubjectDetailsFragmentRecyclerAdapter(): SubjectDetailsFragmentRecyclerAdapter = SubjectDetailsFragmentRecyclerAdapter()
+//
+//    @Singleton
+//    @Provides
+//    fun provideSubjectDetailsFragmentRecyclerAdapter(): SubjectDetailsFragmentRecyclerAdapter = SubjectDetailsFragmentRecyclerAdapter()
 
     @Singleton
     @Provides
