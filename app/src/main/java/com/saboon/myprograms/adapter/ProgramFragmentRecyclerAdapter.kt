@@ -36,8 +36,6 @@ class ProgramFragmentRecyclerAdapter():RecyclerView.Adapter<ProgramFragmentRecyc
         override fun areContentsTheSame(oldItem: ModelProgram, newItem: ModelProgram): Boolean {
             return oldItem == newItem
         }
-
-
     }
 
     private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
@@ -69,10 +67,6 @@ class ProgramFragmentRecyclerAdapter():RecyclerView.Adapter<ProgramFragmentRecyc
 
         programTitle.text = programs[position].title
         programCreatedDate.text = DateTimeGenerator().convertLongToDateTime(programs[position].dateModified, "dd MMM yyyy / HH:mm")
-
-
-
-
 
 
         deleteButton.setOnClickListener {

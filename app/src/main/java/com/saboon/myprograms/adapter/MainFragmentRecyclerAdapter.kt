@@ -14,16 +14,13 @@ class MainFragmentRecyclerAdapter: RecyclerView.Adapter<MainFragmentRecyclerAdap
 
 
 
-
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainFragmentViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.row_main_list_item_fragment_main,parent, false)
         return MainFragmentViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return 7 //days of week
+        return 7 //days of wee
     }
 
     override fun onBindViewHolder(holder: MainFragmentViewHolder, position: Int) {
