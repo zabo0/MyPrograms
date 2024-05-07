@@ -91,7 +91,6 @@ class AddEditEventDialogFragment(): DialogFragment() {
             when(it.itemId){
                 R.id.menu_save -> {
                     if (event != null){
-                        // TODO: update event
                         updateEvent()
                         dialog?.dismiss()
                     }else{

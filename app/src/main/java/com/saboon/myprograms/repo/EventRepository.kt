@@ -14,12 +14,15 @@ class EventRepository @Inject constructor(
     }
 
     override suspend fun deleteEvent(id: String) {
-
         eventDAO.deleteEvent(id)
     }
 
-    override suspend fun deleteAllEventByOwnerId(ownerId: String) {
-        eventDAO.deleteAllEventByOwnerId(ownerId)
+    override suspend fun deleteAllEventByOwnerSubjectId(ownerSubjectId: String) {
+        eventDAO.deleteAllEventByOwnerSubjectId(ownerSubjectId)
+    }
+
+    override suspend fun deleteAllEventByOwnerProgramId(ownerProgramId: String) {
+        eventDAO.deleteAllEventByOwnerProgramId(ownerProgramId)
     }
 
     override fun observeEvent(id: String): LiveData<ModelEvent> {
@@ -30,8 +33,12 @@ class EventRepository @Inject constructor(
         return eventDAO.observeAllEvent()
     }
 
-    override fun observeAllEventByOwnerId(ownerId: String): LiveData<List<ModelEvent>?> {
-        return eventDAO.observeAllEventByOwnerSubjectId(ownerId)
+    override fun observeAllEventByOwnerSubjectId(ownerSubjectId: String): LiveData<List<ModelEvent>?> {
+        return eventDAO.observeAllEventByOwnerSubjectId(ownerSubjectId)
+    }
+
+    override fun observeAllEventByOwnerProgramId(ownerProgramId: String): LiveData<List<ModelEvent>?> {
+        return eventDAO.observeAllEventByOwnerProgramId(ownerProgramId)
     }
 
     override suspend fun updateEvent(

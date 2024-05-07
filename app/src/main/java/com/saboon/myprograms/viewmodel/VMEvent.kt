@@ -21,7 +21,7 @@ class VMEvent @Inject constructor(
     }
 
     suspend fun deleteAllEventByOwnerId(ownerId: String){
-        repository.deleteAllEventByOwnerId(ownerId)
+        repository.deleteAllEventByOwnerSubjectId(ownerId)
     }
 
     fun observeEvent(id: String): LiveData<ModelEvent> {
@@ -32,8 +32,12 @@ class VMEvent @Inject constructor(
         return repository.observeAllEvent()
     }
 
-    fun observeAllEventByOwnerId(ownerId: String): LiveData<List<ModelEvent>?> {
-        return repository.observeAllEventByOwnerId(ownerId)
+    fun observeAllEventByOwnerSubjectId(ownerSubjectId: String): LiveData<List<ModelEvent>?> {
+        return repository.observeAllEventByOwnerSubjectId(ownerSubjectId)
+    }
+
+    fun observeAllEventByOwnerProgramId(ownerProgramId: String): LiveData<List<ModelEvent>?> {
+        return repository.observeAllEventByOwnerProgramId(ownerProgramId)
     }
 
     suspend fun updateEvent(

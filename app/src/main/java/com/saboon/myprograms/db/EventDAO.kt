@@ -17,7 +17,10 @@ interface EventDAO {
     suspend fun deleteEvent(id: String)
 
     @Query("DELETE FROM events WHERE ownerSubjectId = :ownerSubjectId")
-    suspend fun deleteAllEventByOwnerId(ownerSubjectId: String)
+    suspend fun deleteAllEventByOwnerSubjectId(ownerSubjectId: String)
+
+    @Query("DELETE FROM events WHERE ownerProgramId = :ownerProgramId")
+    suspend fun deleteAllEventByOwnerProgramId(ownerProgramId: String)
 
     @Query("SELECT * FROM events WHERE id = :id")
     fun observeEvent(id: String): LiveData<ModelEvent>
@@ -27,6 +30,9 @@ interface EventDAO {
 
     @Query("SELECT * FROM events WHERE ownerSubjectId = :ownerSubjectId")
     fun observeAllEventByOwnerSubjectId(ownerSubjectId: String): LiveData<List<ModelEvent>?>
+
+    @Query("SELECT * FROM events WHERE ownerProgramId = :ownerProgramId")
+    fun observeAllEventByOwnerProgramId(ownerProgramId: String): LiveData<List<ModelEvent>?>
 
     @Query("UPDATE events SET dateModified= :dateModified, title= :title, description= :description, date= :date, timeStart= :timeStart, timeEnd= :timeEnd, place= :place, timeReminder= :timeReminder, repeat = :repeat WHERE id = :id")
     suspend fun updateEvent(

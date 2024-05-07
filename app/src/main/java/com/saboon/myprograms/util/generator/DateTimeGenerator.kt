@@ -28,8 +28,14 @@ class DateTimeGenerator {
         return 0
     }
 
-    fun getWeek():Int{
+    fun getWeekNumber():Int{
+        return SimpleDateFormat("ww").format(getDateInMillis()).toInt()
+    }
+
+    fun getWeekNumber(date: Long): Int{
         val c = Calendar.getInstance()
-        return SimpleDateFormat("ww").format(c.timeInMillis).toInt()
+        c.timeInMillis = date
+        return c.weekYear
+        //return SimpleDateFormat("ww").format(c.timeInMillis).toInt()
     }
 }

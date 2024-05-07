@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="ders"
+                android:text="SubjectTitle"
                 android:textColor="?attr/colorOnSurfaceVariant"
                 android:textSize="16sp"
                 android:textAlignment="textStart"/>
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="description"
+                android:text="EventTitle"
                 android:textColor="?attr/colorOnSurfaceVariant"
                 android:textSize="16sp"
                 android:textAlignment="textEnd"/>
@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="21 Kasim 2023"
+                android:text="EventDate"
                 android:textColor="?attr/colorOnSurfaceVariant"
                 android:textSize="14sp"
                 android:textAlignment="textStart"/>
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="place"
+                android:text="eventPlace"
                 android:textColor="?attr/colorOnSurfaceVariant"
                 android:textSize="14sp"
                 android:textAlignment="textEnd"/>

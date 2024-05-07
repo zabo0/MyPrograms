@@ -7,11 +7,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.saboon.myprograms.R
-import com.saboon.myprograms.adapter.MainFragmentProgramsRecyclerAdapter
 import com.saboon.myprograms.databinding.FragmentMainBinding
 import com.saboon.myprograms.model.ModelEvent
 import com.saboon.myprograms.model.ModelProgram
 import com.saboon.myprograms.model.ModelSubject
+import com.saboon.myprograms.util.generator.DateTimeGenerator
 import com.saboon.myprograms.viewmodel.VMEvent
 import com.saboon.myprograms.viewmodel.VMProgram
 import com.saboon.myprograms.viewmodel.VMSubject
@@ -36,13 +36,7 @@ class FragmentMain @Inject constructor(
 
     private lateinit var program: ModelProgram
     private lateinit var subjects: List<ModelSubject>
-    private lateinit var events: List<ModelEvent>
-
-
-
-
-
-
+    private lateinit var allProgramEvents: List<ModelEvent>
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,6 +45,7 @@ class FragmentMain @Inject constructor(
 
         viewModelProgram = ViewModelProvider(requireActivity())[VMProgram::class.java]
         viewModelSubject = ViewModelProvider(requireActivity())[VMSubject::class.java]
+        viewModelEvent = ViewModelProvider(requireActivity())[VMEvent::class.java]
 
         binding = FragmentMainBinding.bind(view)
         _binding = binding
@@ -99,8 +94,7 @@ class FragmentMain @Inject constructor(
             findNavController().navigate(action)
         }
 
-        // TODO: programlara subject ekle
-
+        //databaseden butun eventleri cagir findEventById clasina gonder ve liste al. listeyi recycler adaptere gonder.
 
 
 
@@ -121,6 +115,17 @@ class FragmentMain @Inject constructor(
                     binding.fragmentMainLinearLayoutEmpty.visibility = View.GONE
                 }
             }
+        })
+
+        viewModelEvent.observeAllEventByOwnerProgramId(program.id).observe(viewLifecycleOwner, Observer {
+            if( it!= null){
+                allProgramEvents = it
+                if (allProgramEvents.isNotEmpty()){
+                    val weekNumber = DateTimeGenerator().getWeekNumber()
+
+                }
+            }
+
         })
     }
 

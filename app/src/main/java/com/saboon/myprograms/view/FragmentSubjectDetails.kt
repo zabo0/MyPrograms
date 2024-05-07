@@ -72,7 +72,7 @@ class FragmentSubjectDetails @Inject constructor(
                 subject = subjectResult
                 applyDataToView()
 
-                viewModelEvent.observeAllEventByOwnerId(subject.id).observe(viewLifecycleOwner, Observer {eventList ->
+                viewModelEvent.observeAllEventByOwnerSubjectId(subject.id).observe(viewLifecycleOwner, Observer { eventList ->
                     if (eventList != null){
                         events = eventList
                         eventRecyclerAdapter.events = events
@@ -148,7 +148,6 @@ class FragmentSubjectDetails @Inject constructor(
         eventRecyclerAdapter.setOnItemClickListener {event ->
             Dialogs(requireActivity(),requireContext()).showEventDetailsDialog(event){
                 if(it != null){
-                    // TODO: edit event
                     //edit event
                     val editEventDialogFragment = AddEditEventDialogFragment()
                     editEventDialogFragment.subject = subject
@@ -157,9 +156,11 @@ class FragmentSubjectDetails @Inject constructor(
                 }
                 else{
                     //delete event
-                    Dialogs(requireActivity(), requireContext()).showDeleteAlertDialog(resources.getString(R.string.delete), resources.getString(R.string.areYouSure)){
-                        viewModelEvent.viewModelScope.launch {
-                            viewModelEvent.deleteEvent(event.id)
+                    Dialogs(requireActivity(), requireContext()).showDeleteAlertDialog(resources.getString(R.string.delete), resources.getString(R.string.areYouSure)){ isPositive->
+                        if(isPositive){
+                            viewModelEvent.viewModelScope.launch {
+                                viewModelEvent.deleteEvent(event.id)
+                            }
                         }
                     }
                 }

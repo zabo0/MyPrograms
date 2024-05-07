@@ -4,11 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.saboon.myprograms.R
+import com.saboon.myprograms.viewmodel.VMEvent
 
 class MainFragmentRecyclerAdapter: RecyclerView.Adapter<MainFragmentRecyclerAdapter.MainFragmentViewHolder>() {
     class MainFragmentViewHolder(view: View): RecyclerView.ViewHolder(view)
+
 
 
 
@@ -20,7 +23,7 @@ class MainFragmentRecyclerAdapter: RecyclerView.Adapter<MainFragmentRecyclerAdap
     }
 
     override fun getItemCount(): Int {
-        return 6 //days of week
+        return 7 //days of week
     }
 
     override fun onBindViewHolder(holder: MainFragmentViewHolder, position: Int) {
@@ -28,8 +31,6 @@ class MainFragmentRecyclerAdapter: RecyclerView.Adapter<MainFragmentRecyclerAdap
         val textDate: TextView = holder.itemView.findViewById(R.id.mainFragmentRecyclerView_date)
         val recyclerChild: RecyclerView = holder.itemView.findViewById(R.id.mainFragmentRecyclerView_recyclerView)
 
-
-        //findEventById clasini cagir
 
 
     }
