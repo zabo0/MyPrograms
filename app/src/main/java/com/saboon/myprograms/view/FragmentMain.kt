@@ -122,7 +122,7 @@ class FragmentMain @Inject constructor(
                 allProgramEvents = it
                 if (allProgramEvents.isNotEmpty()){
                     val weekNumber = DateTimeGenerator().getWeekNumber()
-
+                    // TODO: listeleme algoritmasini olusturup adaptera gonder
                 }
             }
 

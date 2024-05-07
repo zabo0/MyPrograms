@@ -12,7 +12,7 @@ import com.saboon.myprograms.viewmodel.VMEvent
 class MainFragmentRecyclerAdapter: RecyclerView.Adapter<MainFragmentRecyclerAdapter.MainFragmentViewHolder>() {
     class MainFragmentViewHolder(view: View): RecyclerView.ViewHolder(view)
 
-
+    // TODO: burada diffutil ekle ve olusturulacak listeyi hazirla
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainFragmentViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.row_main_list_item_fragment_main,parent, false)
